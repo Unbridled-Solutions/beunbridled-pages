@@ -3,77 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeUnbridled Onboarding Questionnaire</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Apply — BeUnbridled</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --navy: #1a2535;
-            --blue: #5a8ba7;
-            --cream: #f0ede6;
-            --white: #ffffff;
+            --bg-void:       #07080f;
+            --bg-deep:       #0d0f1a;
+            --bg-surface:    #131629;
+            --bg-card:       rgba(255,255,255,0.03);
+            --bg-card-hover: rgba(255,255,255,0.055);
+            --text-primary:  #f0f2ff;
+            --text-secondary:#9ba3c4;
+            --text-muted:    #535a7a;
+            --text-helper:   #6b7499;
+            --accent:        #3de8c8;
+            --accent-glow:   rgba(61,232,200,0.18);
+            --accent-glow-sm:rgba(61,232,200,0.07);
+            --accent-dim:    #27b89e;
+            --brand:         #5a8ba7;
+            --border-subtle: rgba(255,255,255,0.06);
+            --border-std:    rgba(255,255,255,0.09);
+            --border-accent: rgba(61,232,200,0.28);
+            --border-focus:  rgba(61,232,200,0.55);
+            --error:         #f87171;
+            --mono:          'JetBrains Mono', ui-monospace, monospace;
         }
 
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--cream);
-            color: var(--navy);
-            margin: 0;
-            padding: 20px;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-void);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            padding: clamp(16px, 4vw, 32px);
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            min-height: 100vh;
-            box-sizing: border-box;
+        }
+
+        /* Subtle radial bg glow */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(61,232,200,0.05) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            background: var(--bg-deep);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: clamp(24px, 5vw, 44px);
             width: 100%;
-            max-width: 700px;
-            box-sizing: border-box;
-            margin-top: 20px; /* Added some margin from top */
+            max-width: 680px;
+            margin-top: clamp(16px, 3vw, 32px);
+            margin-bottom: 32px;
+        }
+
+        /* Top accent line */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 16px 16px 0 0;
+            opacity: 0.5;
         }
 
         h1, h2, h3 {
-            color: var(--navy);
+            color: var(--text-primary);
             text-align: center;
         }
 
+        h2 {
+            font-size: clamp(17px, 2.5vw, 20px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+        }
+
+        h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        /* Progress bar */
         .progress-bar-container {
             width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin-bottom: 30px;
-            height: 10px;
+            background: var(--border-subtle);
+            border-radius: 999px;
+            margin-bottom: 32px;
+            height: 3px;
+            overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
             width: 0%;
-            background-color: var(--blue);
-            border-radius: 5px;
-            transition: width 0.4s ease-in-out;
+            background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+            border-radius: 999px;
+            transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 0 8px var(--accent-glow);
         }
 
-        .form-step {
-            display: none;
-        }
+        /* Form steps */
+        .form-step { display: none; }
+        .form-step.active { display: block; }
 
-        .form-step.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
+            font-size: 13px;
             font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Helper text under labels */
+        .form-group p {
+            font-size: 12px;
+            color: var(--text-helper);
+            margin: -2px 0 10px 0;
+            line-height: 1.55;
         }
 
         input[type="text"],
@@ -81,135 +144,234 @@
         textarea,
         select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
+            padding: 11px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-std);
+            border-radius: 8px;
+            font-size: 14px;
             font-family: 'Inter', sans-serif;
-            color: var(--navy);
+            color: var(--text-primary);
+            transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            background: rgba(61,232,200,0.03);
+            box-shadow: 0 0 0 3px var(--accent-glow-sm);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Select arrow */
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ba3c4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        select option {
+            background: var(--bg-surface);
+            color: var(--text-primary);
         }
 
         textarea {
             resize: vertical;
             min-height: 100px;
+            line-height: 1.6;
         }
 
-        .checkbox-group, .radio-group {
-            margin-top: 10px;
-        }
+        /* Checkboxes & radios */
+        .checkbox-group,
+        .radio-group { margin-top: 8px; }
 
-        .checkbox-group label, .radio-group label {
+        .checkbox-group label,
+        .radio-group label {
             display: flex;
             align-items: center;
+            gap: 10px;
             margin-bottom: 10px;
+            font-size: 13px;
             font-weight: 400;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: background 0.15s, border-color 0.15s;
         }
 
-        .checkbox-group input[type="checkbox"], .radio-group input[type="radio"] {
-            margin-right: 10px;
+        .checkbox-group label:hover,
+        .radio-group label:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-subtle);
+        }
+
+        .checkbox-group input[type="checkbox"],
+        .radio-group input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            accent-color: var(--accent);
+            cursor: pointer;
         }
 
         .other-input {
-            margin-top: 10px;
-            padding-left: 25px; /* Align with checkbox */
-            display: none; /* Hidden by default */
+            margin-top: 8px;
+            display: none;
         }
 
+        /* Buttons */
         .btn-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            align-items: center;
+            margin-top: 32px;
+            gap: 12px;
         }
 
         button {
-            background-color: var(--blue);
-            color: var(--white);
-            padding: 12px 25px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            padding: 11px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.15s, background 0.15s;
         }
 
-        button:hover {
-            background-color: #4a7a97; /* A slightly darker blue */
+        /* Primary — Next / Submit */
+        button.next-btn,
+        button[type="submit"] {
+            background: var(--accent);
+            color: var(--bg-void);
+            box-shadow: 0 0 0 0 var(--accent-glow);
+        }
+        button.next-btn:hover,
+        button[type="submit"]:hover {
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-1px);
+        }
+
+        /* Ghost — Back */
+        button.prev-btn {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-std);
+        }
+        button.prev-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            color: var(--text-primary);
         }
 
         button:disabled {
-            background-color: #cccccc;
+            opacity: 0.35;
             cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
+        /* Error states */
+        .error-message {
+            color: var(--error);
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        input.error,
+        textarea.error,
+        select.error {
+            border-color: var(--error);
+        }
+
+        /* Completion screen */
         .completion-screen {
             text-align: center;
             display: none;
-            padding: 40px 20px;
+            padding: 40px 16px;
         }
 
         .completion-screen h2 {
-            color: var(--navy);
-            margin-bottom: 20px;
-            font-size: 28px;
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .completion-screen .accent-check {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: block;
         }
 
         .completion-screen p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
         }
 
         .field-summary {
-            background-color: var(--cream);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
             padding: 20px;
-            border-radius: 6px;
             text-align: left;
-            margin-top: 30px;
+            margin-top: 28px;
         }
 
         .field-summary p {
             margin-bottom: 8px;
-            font-size: 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .field-summary strong {
-            color: var(--navy);
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
-        .error-message {
-            color: #d9534f;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
+        /* Required asterisk */
+        span[style*="d9534f"] { color: var(--error) !important; }
 
+        /* Mobile */
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .container {
-                padding: 20px;
-            }
-            .btn-group {
-                flex-direction: column;
-            }
-            button {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            button:last-child {
-                margin-bottom: 0;
+            body { padding: 12px; }
+            .container { padding: 20px; }
+            .btn-group { flex-direction: column-reverse; }
+            button { width: 100%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="text-align: center; padding: 10px 0 28px 0; border-bottom: 1px solid #e8e4dc; margin-bottom: 28px;">
-            <h1 style="font-size: 28px; font-weight: 700; color: #1a2535; margin: 0 0 8px 0; letter-spacing: -0.5px;">Get Started with BeUnbridled</h1>
-            <p style="font-size: 15px; color: #5a8ba7; margin: 0; font-weight: 400;">Six questions. 24 hours. A Chief of Staff who already knows your business.</p>
+        <div style="text-align:center;padding:4px 0 28px 0;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:28px;">
+            <div style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#3de8c8;letter-spacing:0.12em;text-transform:uppercase;padding:5px 13px;border:1px solid rgba(61,232,200,0.28);border-radius:999px;background:rgba(61,232,200,0.07);margin-bottom:20px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#3de8c8;display:inline-block;"></span>
+                AI Chief of Staff — Done for You
+            </div>
+            <h1 style="font-size:clamp(22px,4vw,30px);font-weight:700;color:#f0f2ff;margin:0 0 10px 0;letter-spacing:-0.03em;line-height:1.1;">Get Started with BeUnbridled</h1>
+            <p style="font-size:14px;color:#9ba3c4;margin:0;font-weight:400;line-height:1.6;">Six questions. 24 hours. A Chief of Staff who already knows your business.</p>
         </div>
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
@@ -408,6 +570,7 @@
 
         <!-- Completion Screen -->
         <div class="completion-screen" id="completionScreen">
+            <span class="accent-check">✦</span>
             <h2>You're in!</h2>
             <p>We'll have your Chief of Staff ready within 24 hours.</p>
             <div class="field-summary" id="submissionSummary">
