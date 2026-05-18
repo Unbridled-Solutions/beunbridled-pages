@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Share your early experience with your MC agent — helps us make it better." />
+  <title>Early Feedback · BeUnbridled.ai</title>
+  <style>
+    @font-face { font-family: 'Azo Sans'; src: url('AzoSans-Thin.woff2')    format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Azo Sans'; src: url('AzoSans-Light.woff2')   format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Azo Sans'; src: url('AzoSans-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Azo Sans'; src: url('AzoSans-Medium.woff2')  format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Azo Sans'; src: url('AzoSans-Bold.woff2')    format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deepest-blue: #001c28;
+      --deep-blue:    #2d4654;
+      --dark-blue:    #396889;
+      --brand-blue:   #5a8ba7;
+      --light-blue:   #78b0d1;
+      --fog:          #a6bbc8;
+      --bg:           var(--deepest-blue);
+      --surface:      rgba(90, 139, 167, 0.07);
+      --surface-hover: rgba(90, 139, 167, 0.12);
+      --border:       rgba(90, 139, 167, 0.2);
+      --border-focus: rgba(90, 139, 167, 0.6);
+      --text:         #F8FAFC;
+      --muted:        var(--fog);
+      --accent:       var(--brand-blue);
+      --font:         'Azo Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    body {
+      padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient glows */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 700px;
+      background: radial-gradient(ellipse, rgba(90, 139, 167, 0.12) 0%, transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -15%;
+      right: 5%;
+      width: 600px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(45, 70, 84, 0.5) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+      opacity: 0.85;
+      transition: opacity 0.15s;
+    }
+    .logo-link:hover { opacity: 1; }
+
+    .logo-elk {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: brightness(0.9);
+    }
+
+    .logo-wordmark {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fog);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: clamp(0.65rem, 1.5vw, 0.72rem);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fog);
+      margin-bottom: 1.25rem;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      opacity: 0.9;
+    }
+
+    .header h1 {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    .header p {
+      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── Form card ── */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    /* ── Identity row ── */
+    .identity-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 500px) {
+      .identity-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Question blocks ── */
+    .question {
+      margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    }
+    .question:last-of-type { margin-bottom: 0; }
+
+    .question-label {
+      display: block;
+      font-size: clamp(0.75rem, 1.7vw, 0.82rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin-bottom: 0.45rem;
+    }
+
+    .question-prompt {
+      font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+    }
+
+    .question-hint {
+      font-size: clamp(0.78rem, 1.8vw, 0.85rem);
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* ── Inputs ── */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      background: rgba(0, 28, 40, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: clamp(0.88rem, 2vw, 0.95rem);
+      font-weight: 300;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+      resize: vertical;
+    }
+
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    textarea::placeholder {
+      color: rgba(166, 187, 200, 0.4);
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: var(--border-focus);
+      background: rgba(0, 28, 40, 0.7);
+    }
+
+    textarea { min-height: 90px; line-height: 1.6; }
+
+    /* ── Wow Factor radio ── */
+    .wow-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+    @media (max-width: 480px) {
+      .wow-options { grid-template-columns: 1fr; }
+    }
+
+    .wow-option {
+      position: relative;
+    }
+
+    .wow-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .wow-option label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      background: rgba(0, 28, 40, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: clamp(0.82rem, 1.9vw, 0.9rem);
+      font-weight: 400;
+      color: var(--muted);
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      line-height: 1.35;
+      min-height: 44px;
+      user-select: none;
+    }
+
+    .wow-option label:hover {
+      border-color: var(--border-focus);
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+
+    .wow-option input[type="radio"]:checked + label {
+      border-color: var(--brand-blue);
+      background: rgba(90, 139, 167, 0.15);
+      color: var(--text);
+    }
+
+    .wow-emoji { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: clamp(1.5rem, 3vw, 2rem) 0;
+    }
+
+    /* ── Submit ── */
+    .submit-row {
+      margin-top: clamp(1.5rem, 4vw, 2rem);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1.75rem;
+      background: var(--brand-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: clamp(0.88rem, 2vw, 0.95rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--light-blue);
+    }
+
+    .btn-submit:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .submit-note {
+      font-size: clamp(0.75rem, 1.7vw, 0.82rem);
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* ── States ── */
+    .form-state { display: none; }
+
+    /* Loading spinner */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success state */
+    .success-card {
+      text-align: center;
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-card h2 {
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .success-card p {
+      font-size: clamp(0.9rem, 2.2vw, 1rem);
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* Error banner */
+    .error-banner {
+      display: none;
+      background: rgba(220, 60, 60, 0.12);
+      border: 1px solid rgba(220, 60, 60, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: clamp(0.82rem, 1.9vw, 0.9rem);
+      color: #ff9999;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(0.72rem, 1.6vw, 0.78rem);
+      color: var(--deep-blue);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .footer a { color: var(--deep-blue); text-decoration: none; }
+    .footer a:hover { color: var(--fog); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spinner { animation: none; opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo-link">
+        <img
+          src="https://offers.hotelstcloud.com/assets/logos/unbridled-elk-icon-white.png"
+          alt="BeUnbridled elk icon"
+          class="logo-elk"
+        />
+        <span class="logo-wordmark">BeUnbridled</span>
+      </a>
+
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Early Access Feedback
+      </div>
+
+      <h1>How's your MC doing?</h1>
+      <p>You've had a little time with your agent. Tell us what's working, what isn't, and what you wish it could do. All questions are optional — answer what's useful.</p>
+    </div>
+
+    <!-- Form card -->
+    <div class="form-card">
+
+      <!-- Success state (hidden until submit) -->
+      <div id="successState" class="form-state">
+        <div class="success-card">
+          <div class="success-icon">🙌</div>
+          <h2>Thanks — seriously.</h2>
+          <p>This feedback goes straight into what we're building next. If you mentioned something specific, we'll probably reach out. Your MC is getting better because of this.</p>
+        </div>
+      </div>
+
+      <!-- The actual form -->
+      <form id="feedbackForm">
+
+        <!-- Identity (optional but helpful) -->
+        <div class="identity-row">
+          <div>
+            <label class="question-label" for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="First name is fine" autocomplete="given-name" />
+          </div>
+          <div>
+            <label class="question-label" for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="question">
+          <span class="question-label">Question 1</span>
+          <p class="question-prompt">What have you actually used it for so far?</p>
+          <p class="question-hint">List anything and everything, even small things. We want the full picture.</p>
+          <textarea id="usedFor" name="usedFor" placeholder="e.g. Drafted a client email, summarized a meeting, looked up a reservation, answered a question about my business..." rows="4"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q2 -->
+        <div class="question">
+          <span class="question-label">Question 2</span>
+          <p class="question-prompt">What's one specific thing it did well?</p>
+          <p class="question-hint">What did you ask? What did it do? The more specific, the better.</p>
+          <textarea id="didWell" name="didWell" placeholder="e.g. I asked it to write a follow-up email for a client who went quiet — it nailed the tone without me having to explain much..." rows="3"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q3 -->
+        <div class="question">
+          <span class="question-label">Question 3</span>
+          <p class="question-prompt">What's one thing that disappointed you or didn't work?</p>
+          <p class="question-hint">No sugar-coating needed. If it fell flat or felt off, we want to know.</p>
+          <textarea id="disappointed" name="disappointed" placeholder="e.g. It gave me a generic response when I needed something very specific to my industry..." rows="3"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q4 -->
+        <div class="question">
+          <span class="question-label">Question 4</span>
+          <p class="question-prompt">What do you wish it could do but currently can't?</p>
+          <p class="question-hint">Features, integrations, behaviors — anything you've thought "why can't it just..."</p>
+          <textarea id="wishItCould" name="wishItCould" placeholder="e.g. I wish it could pull directly from my CRM so I don't have to paste contact info every time..." rows="3"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q5 -->
+        <div class="question">
+          <span class="question-label">Question 5</span>
+          <p class="question-prompt">Is there anywhere you're getting stuck or confused?</p>
+          <p class="question-hint">Anything about setup, how to use it, or what it can actually do.</p>
+          <textarea id="gettingStuck" name="gettingStuck" placeholder="e.g. I'm not sure how to give it context about my business without repeating myself every time..." rows="3"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q6 — Wow Factor -->
+        <div class="question">
+          <span class="question-label">Question 6</span>
+          <p class="question-prompt">Honest gauge — did you feel any wow factor yet?</p>
+          <p class="question-hint">No right answer. We'd rather know the truth.</p>
+          <div class="wow-options" role="radiogroup" aria-label="Wow factor">
+            <div class="wow-option">
+              <input type="radio" name="wowFactor" id="wow1" value="😮 Hell yes, multiple times" />
+              <label for="wow1"><span class="wow-emoji">😮</span> Hell yes, multiple times</label>
+            </div>
+            <div class="wow-option">
+              <input type="radio" name="wowFactor" id="wow2" value="✨ One moment so far" />
+              <label for="wow2"><span class="wow-emoji">✨</span> One moment so far</label>
+            </div>
+            <div class="wow-option">
+              <input type="radio" name="wowFactor" id="wow3" value="🤔 Not quite yet" />
+              <label for="wow3"><span class="wow-emoji">🤔</span> Not quite yet</label>
+            </div>
+            <div class="wow-option">
+              <input type="radio" name="wowFactor" id="wow4" value="😐 Honestly, no" />
+              <label for="wow4"><span class="wow-emoji">😐</span> Honestly, no</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="submit-row">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            Send feedback
+          </button>
+          <span class="submit-note">All questions optional. No account needed.</span>
+        </div>
+
+        <div class="error-banner" id="errorBanner">
+          Something went wrong on our end. Please try again — your answers won't be lost.
+        </div>
+
+      </form>
+    </div>
+
+    <div class="footer">
+      <a href="/">beunbridled.ai</a> &nbsp;·&nbsp; Doing Good by Doing Well
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorBanner = document.getElementById('errorBanner');
+    const successState = document.getElementById('successState');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Lock UI
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Sending…';
+      errorBanner.style.display = 'none';
+
+      // Collect data
+      const selectedWow = document.querySelector('input[name="wowFactor"]:checked');
+      const payload = {
+        name:         document.getElementById('name').value.trim(),
+        email:        document.getElementById('email').value.trim(),
+        usedFor:      document.getElementById('usedFor').value.trim(),
+        didWell:      document.getElementById('didWell').value.trim(),
+        disappointed: document.getElementById('disappointed').value.trim(),
+        wishItCould:  document.getElementById('wishItCould').value.trim(),
+        gettingStuck: document.getElementById('gettingStuck').value.trim(),
+        wowFactor:    selectedWow ? selectedWow.value : '',
+      };
+
+      try {
+        const res = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error(`Server error ${res.status}`);
+
+        // Success
+        form.style.display = 'none';
+        successState.style.display = 'block';
+
+      } catch (err) {
+        errorBanner.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send feedback';
+      }
+    });
+  </script>
+</body>
+</html>
