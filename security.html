@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BeUnbridled security posture — how we protect your AI Chief of Staff, your data, and your business.">
+  <title>Security Posture | BeUnbridled</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:   #07080f;
+      --teal:   #3de8c8;
+      --blue:   #5a8ba7;
+      --mid:    #1a2535;
+      --surface:#111827;
+      --border: rgba(61,232,200,0.15);
+      --text:   #e8edf2;
+      --muted:  #8a9ab0;
+      --white:  #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(16px, 1.8vw, 18px);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 6vw, 4rem);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(7,8,15,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-brand .wordmark {
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-brand .wordmark span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1.2rem, 3vw, 2rem);
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--teal);
+    }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover {
+      color: var(--navy) !important;
+      opacity: 0.88;
+    }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 6vw, 4rem) clamp(3rem, 8vw, 6rem);
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(61,232,200,0.08);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-meta .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      opacity: 0.6;
+    }
+
+    /* ── SUMMARY STRIP ───────────────────────────────── */
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .strip-item {
+      background: var(--navy);
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2rem);
+      text-align: center;
+    }
+
+    .strip-item .strip-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .strip-item .strip-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      margin-bottom: 0.3rem;
+    }
+
+    .strip-item .strip-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── MAIN CONTENT ────────────────────────────────── */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 6vw, 4rem);
+    }
+
+    .section-intro {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
+    .section-intro h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-intro p {
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ── PILLAR GRID ─────────────────────────────────── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1rem, 3vw, 1.5rem);
+      margin-bottom: clamp(3rem, 8vw, 6rem);
+    }
+
+    @media (max-width: 640px) {
+      .pillars { grid-template-columns: 1fr; }
+    }
+
+    .pillar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .pillar-card:hover {
+      border-color: rgba(61,232,200,0.35);
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), transparent);
+      opacity: 0.5;
+    }
+
+    .pillar-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-card h3 {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
+    }
+
+    .pillar-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .pillar-card ul li {
+      font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+      color: var(--muted);
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .pillar-card ul li::before {
+      content: '✓';
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* ── DETAIL SECTIONS ─────────────────────────────── */
+    .detail-sections {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: clamp(3rem, 8vw, 6rem);
+    }
+
+    .detail-block {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+      padding-bottom: clamp(2rem, 5vw, 3.5rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-block:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+      .detail-block {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .detail-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-heading {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .detail-body p {
+      color: var(--muted);
+      font-size: clamp(0.9rem, 1.8vw, 1rem);
+      margin-bottom: 0.8rem;
+      line-height: 1.7;
+    }
+
+    .detail-body p:last-child { margin-bottom: 0; }
+
+    .detail-body strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── WHAT WE DON'T DO ────────────────────────────── */
+    .never-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: clamp(3rem, 8vw, 6rem);
+    }
+
+    .never-section h2 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .never-section .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .never-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 1rem;
+    }
+
+    .never-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .never-x {
+      color: #e05555;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .never-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── QUESTIONS CTA ───────────────────────────────── */
+    .cta-block {
+      text-align: center;
+      padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(61,232,200,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-block h2 {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-block p {
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--teal);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 6vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    .footer-brand span { color: var(--teal); }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--teal); }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-brand">
+    <span class="wordmark">Be<span>Unbridled</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/architecture">How It Works</a></li>
+    <li><a href="/security" class="active">Security</a></li>
+    <li><a href="/apply" class="nav-cta">Apply →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Security Posture</div>
+  <h1>Your data is yours.<br><em>Full stop.</em></h1>
+  <p>Every BeUnbridled client runs on a dedicated private server — not a shared platform. Here's exactly what that means for your security.</p>
+  <div class="hero-meta">
+    <span><span class="dot"></span> Document current as of May 2026</span>
+    <span><span class="dot"></span> Updated as infrastructure evolves</span>
+    <span><span class="dot"></span> Prepared by MC, Digital Chief of Staff</span>
+  </div>
+</section>
+
+<!-- SUMMARY STRIP -->
+<div class="summary-strip">
+  <div class="strip-item">
+    <div class="strip-icon">🏠</div>
+    <div class="strip-label">Infrastructure</div>
+    <div class="strip-value">Dedicated private server per client</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon">🔐</div>
+    <div class="strip-label">Access</div>
+    <div class="strip-value">SSH key auth only — no passwords</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon">🛡️</div>
+    <div class="strip-label">Intrusion Detection</div>
+    <div class="strip-value">24/7 automated threat blocking</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon">🤖</div>
+    <div class="strip-label">AI Privacy</div>
+    <div class="strip-value">Not used to train any model — ever</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon">💾</div>
+    <div class="strip-label">Backups</div>
+    <div class="strip-value">Daily AES-256 encrypted, 30-day retention</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- Pillar overview -->
+  <div class="section-intro">
+    <h2>Six pillars of protection</h2>
+    <p>A managed AI agent touches sensitive business context daily. Here's how we think about keeping it safe.</p>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar-card">
+      <div class="pillar-icon">🏠</div>
+      <h3>Dedicated Infrastructure</h3>
+      <ul>
+        <li>Your own private VPS — not shared with other clients</li>
+        <li>Hosted in a Tier 1 data center (Ashburn, VA)</li>
+        <li>ISO 27001-certified facility</li>
+        <li>No multi-tenant risk — your memory stays your memory</li>
+      </ul>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🔐</div>
+      <h3>Access Control</h3>
+      <ul>
+        <li>SSH key authentication only — no password logins</li>
+        <li>Root access disabled by default</li>
+        <li>Firewall default-deny — only required ports open</li>
+        <li>Principle of least privilege throughout</li>
+      </ul>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🛡️</div>
+      <h3>Threat Detection</h3>
+      <ul>
+        <li>Industry-standard intrusion prevention (active 24/7)</li>
+        <li>Automatic blocking of suspicious access patterns</li>
+        <li>Critical OS security patches applied automatically</li>
+        <li>Gateway health monitored — alerts fire within 5 minutes</li>
+      </ul>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🤖</div>
+      <h3>AI and Data Privacy</h3>
+      <ul>
+        <li>Your data is never used to train AI models</li>
+        <li>API inference is stateless at the provider level</li>
+        <li>Legal/sensitive tasks routed through zero-retention AI</li>
+        <li>Session memory lives on your server — under your control</li>
+      </ul>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🔑</div>
+      <h3>Credentials and Keys</h3>
+      <ul>
+        <li>All keys stored in permission-locked environment files</li>
+        <li>Never stored in source code or transmitted in plaintext</li>
+        <li>Credentials scoped to minimum required permissions</li>
+        <li>You own your Telegram bot — we never retain the token</li>
+      </ul>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">💾</div>
+      <h3>Backup and Recovery</h3>
+      <ul>
+        <li>Daily encrypted backups to Backblaze B2 object storage</li>
+        <li>AES-256 encryption at rest — 30-day retention</li>
+        <li>Full recovery possible from any server incident</li>
+        <li>Weekly full-system snapshots, independent of daily Hermes backups</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Detail sections -->
+  <div class="detail-sections">
+
+    <div class="detail-block">
+      <div class="detail-title-col">
+        <div class="detail-label">Infrastructure</div>
+        <div class="detail-heading">Your server. Your context. Nobody else's.</div>
+      </div>
+      <div class="detail-body">
+        <p>Every BeUnbridled client receives their own dedicated virtual private server — not a slice of a shared pool. Your agent's knowledge, your conversations, and your business context live in an isolated environment. There is no multi-tenant risk.</p>
+        <p>Our hosting provider operates <strong>ISO 27001-certified data centers</strong> with 24/7 physical security, redundant power, and enterprise network infrastructure. Data is stored in the United States.</p>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-title-col">
+        <div class="detail-label">Access Control</div>
+        <div class="detail-heading">Brute-force attacks aren't possible. By design.</div>
+      </div>
+      <div class="detail-body">
+        <p>Your server does not accept password-based logins — at all. All access requires <strong>cryptographic SSH key authentication</strong>. Brute-force attacks are structurally impossible because passwords are not accepted.</p>
+        <p>Direct root access is disabled. Administrative operations use a named user account with tightly scoped elevated permissions. The agent process runs with only what it needs — nothing more.</p>
+        <p>All inbound traffic is <strong>blocked by default</strong>. Only the ports required for your agent to function are open.</p>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-title-col">
+        <div class="detail-label">AI Privacy</div>
+        <div class="detail-heading">Your conversations don't train anyone's models.</div>
+      </div>
+      <div class="detail-body">
+        <p>We route AI inference through <strong>OpenRouter</strong> to leading model providers (Anthropic Claude, Google Gemini, etc.) under API agreements that explicitly prohibit use of API traffic for model training. Your queries are processed and returned — not stored, not learned from.</p>
+        <p>Session memory lives on your dedicated server, under your control. For legal, M&A, or otherwise sensitive tasks, we route through a <strong>zero-retention inference provider</strong> where no request logs are kept — not even temporarily.</p>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-title-col">
+        <div class="detail-label">Compliance Questions</div>
+        <div class="detail-heading">Specific requirements? Let's talk.</div>
+      </div>
+      <div class="detail-body">
+        <p>If your business operates under specific regulatory frameworks — financial services, healthcare, legal — we can discuss your requirements directly. Our infrastructure is designed with flexibility in mind, and certain configurations (data residency, retention policies, audit logging) are available for discussion.</p>
+        <p>Reach out to Justin Farr directly at <strong>justin@beunbridled.ai</strong> to discuss your specific needs before or during onboarding.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- What we don't do -->
+  <div class="never-section">
+    <h2>What we don't do</h2>
+    <p class="section-sub">Worth saying plainly.</p>
+    <div class="never-grid">
+      <div class="never-item">
+        <span class="never-x">✗</span>
+        <p>Store your credentials in plain text</p>
+      </div>
+      <div class="never-item">
+        <span class="never-x">✗</span>
+        <p>Share your server with other clients</p>
+      </div>
+      <div class="never-item">
+        <span class="never-x">✗</span>
+        <p>Use your data to improve AI models</p>
+      </div>
+      <div class="never-item">
+        <span class="never-x">✗</span>
+        <p>Install unnecessary software on your server</p>
+      </div>
+      <div class="never-item">
+        <span class="never-x">✗</span>
+        <p>Retain copies of your API keys or bot tokens beyond what's needed to run your agent</p>
+      </div>
+      <div class="never-item">
+        <span class="never-x">✗</span>
+        <p>Use third-party remote access tools with persistent access to your server</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Questions before you apply?</h2>
+    <p>If security is a key consideration for your business, we're happy to walk through our setup in detail before you commit to anything.</p>
+    <a href="/apply" class="btn-primary">Start the Conversation →</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Be<span>Unbridled</span></div>
+    <p>A product of Unbridled Solutions. Doing Good by Doing Well.</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/architecture">How It Works</a></li>
+    <li><a href="/apply">Apply</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
