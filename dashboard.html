@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Agent Command Center | BeUnbridled</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #07080f;
+      --surface: #111827;
+      --card:    #1a2235;
+      --border:  rgba(61,232,200,0.12);
+      --teal:    #3de8c8;
+      --blue:    #5a8ba7;
+      --text:    #e8edf2;
+      --muted:   #8a9ab0;
+      --white:   #ffffff;
+      --green:   #4caf7d;
+      --gold:    #e1a463;
+      --red:     #e05555;
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN OVERLAY ─────────────────────────────── */
+    #login-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(2rem, 6vw, 3rem);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .login-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .login-logo span { color: var(--teal); }
+
+    .login-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .login-box input:focus {
+      border-color: var(--teal);
+    }
+
+    .login-btn {
+      width: 100%;
+      background: var(--teal);
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .login-btn:hover { opacity: 0.88; }
+
+    .login-error {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 0.6rem;
+      display: none;
+    }
+
+    /* ── MAIN LAYOUT ───────────────────────────────── */
+    #app { display: none; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem clamp(1.5rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      background: rgba(7,8,15,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+
+    .header-brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .header-brand span { color: var(--teal); }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .header-meta .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(61,232,200,0.08);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+    }
+
+    .header-meta .updated {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .logout-btn {
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
+    }
+    .logout-btn:hover { color: var(--teal); }
+
+    main {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* ── STATS STRIP ───────────────────────────────── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+
+    .stat .val {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat .lbl {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── SECTION HEADER ────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-header h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── AGENT GRID ────────────────────────────────── */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .agent-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .agent-card:hover {
+      border-color: rgba(61,232,200,0.3);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .agent-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.2rem;
+    }
+
+    .agent-client {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+
+    .status-live {
+      background: rgba(76,175,125,0.15);
+      color: var(--green);
+      border: 1px solid rgba(76,175,125,0.3);
+    }
+
+    .status-pending {
+      background: rgba(225,164,99,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(225,164,99,0.3);
+    }
+
+    .status-internal {
+      background: rgba(90,139,167,0.15);
+      color: var(--blue);
+      border: 1px solid rgba(90,139,167,0.3);
+    }
+
+    .card-body {
+      padding: 1rem 1.5rem 1.25rem;
+    }
+
+    .detail-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .detail-key {
+      color: var(--muted);
+      font-weight: 500;
+      flex-shrink: 0;
+      width: 80px;
+    }
+
+    .detail-val {
+      color: var(--text);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.75rem;
+      word-break: break-all;
+    }
+
+    .detail-val.plain {
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+
+    .detail-val a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .detail-val a:hover { text-decoration: underline; }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── INFRA TABLE ───────────────────────────────── */
+    .infra-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .infra-table th {
+      text-align: left;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .infra-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--text);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.75rem;
+      vertical-align: middle;
+    }
+
+    .infra-table td.plain {
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+
+    .infra-table tr:last-child td { border-bottom: none; }
+    .infra-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── OPEN ITEMS ────────────────────────────────── */
+    .open-items {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .open-items h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .open-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.85rem;
+    }
+
+    .open-item:last-child { border-bottom: none; }
+
+    .open-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    .open-item .agent-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(61,232,200,0.08);
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .open-item p { color: var(--text); line-height: 1.5; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem clamp(1.5rem, 5vw, 3rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .infra-table th:nth-child(n+4),
+      .infra-table td:nth-child(n+4) { display: none; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ──────────────────────────────────────────── -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">Be<span>Unbridled</span></div>
+    <div class="login-sub">Agent Command Center</div>
+    <input type="password" id="pw-input" placeholder="Enter password" autocomplete="current-password">
+    <button class="login-btn" onclick="checkPassword()">Unlock →</button>
+    <div class="login-error" id="pw-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ── APP ────────────────────────────────────────────── -->
+<div id="app">
+
+  <header>
+    <div class="header-brand">Be<span>Unbridled</span> &nbsp;·&nbsp; Agent Command Center</div>
+    <div class="header-meta">
+      <span class="badge">Internal · Private</span>
+      <span class="updated">Last updated: May 19, 2026</span>
+      <button class="logout-btn" onclick="logout()">Lock ↩</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Stats -->
+    <div class="stats-strip">
+      <div class="stat"><div class="val">4</div><div class="lbl">Agents Deployed</div></div>
+      <div class="stat"><div class="val">4</div><div class="lbl">Live</div></div>
+      <div class="stat"><div class="val">3</div><div class="lbl">External Clients</div></div>
+      <div class="stat"><div class="val">1</div><div class="lbl">Internal Vertical</div></div>
+      <div class="stat"><div class="val">$2,750</div><div class="lbl">MRR</div></div>
+    </div>
+
+    <!-- Agent Cards -->
+    <div class="section-header"><h2>Active Agents</h2></div>
+    <div class="agent-grid">
+
+      <!-- Ruby -->
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Ruby</div>
+            <div class="agent-client">Jenny Farr — Hotel St. Cloud</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-ruby</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.250.189</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@jennytfarr bot</span></div>
+            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8503827194</span></div>
+            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">ruby-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 11, 2026</span></div>
+            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Marketing</span>
+            <span class="tag">Social Media</span>
+            <span class="tag">Google Workspace</span>
+            <span class="tag">Obsidian ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- jfarr2000 -->
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">jfarr2000</div>
+            <div class="agent-client">Justin Farr — JFARR2000</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-jfarr2000</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.238.200</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8221308132</span></div>
+            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">jfarr2000-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 12, 2026</span></div>
+            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Infrastructure</span>
+            <span class="tag">AI Ops</span>
+            <span class="tag">Obsidian ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grand Poobah -->
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Grand Poobah</div>
+            <div class="agent-client">Mark — Unbridled Hospitality Group</div>
+          </div>
+          <span class="status-pill status-internal">⬡ Internal</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-grand-poobah</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.72.86</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CPX21 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8831016502</span></div>
+            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">grand-poobah-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 13, 2026</span></div>
+            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">Internal</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Hospitality</span>
+            <span class="tag">UHG</span>
+            <span class="tag">Nightly Report → MC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wealth Commander -->
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Wealth Commander</div>
+            <div class="agent-client">Jonathan Wield — Unbridled Wealth</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-wealth-commander</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">178.156.181.207</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CPX21 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@wealth_commander_bot</span></div>
+            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">6064590731</span></div>
+            <div class="detail-row"><span class="detail-key">Web</span><span class="detail-val"><a href="https://wealth.beunbridled.ai" target="_blank">wealth.beunbridled.ai ↗</a></span></div>
+            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">wealth-commander-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 19, 2026</span></div>
+            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$1,000 / mo</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Financial Services</span>
+            <span class="tag">Life Insurance</span>
+            <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Infrastructure -->
+    <div class="section-header"><h2>Infrastructure Constants</h2></div>
+    <table class="infra-table">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="plain">Hetzner SSH — jfarr</td><td>111734903</td><td class="plain">Justin's local machine key</td></tr>
+        <tr><td class="plain">Hetzner SSH — mc-hermes-server</td><td>112161989</td><td class="plain">MC server key — always include on new servers</td></tr>
+        <tr><td class="plain">B2 Key ID (full access)</td><td>0050f37144749e40000000002</td><td class="plain">Use this for ALL client servers</td></tr>
+        <tr><td class="plain">Airtable Base</td><td>appUUjLXEUwlyx23M</td><td class="plain">BeUnbridled Clients table: tblZHw2NCn9gB4dqX</td></tr>
+        <tr><td class="plain">CF Account ID</td><td>22e795039bc55fa5f9f8180ec7af3d79</td><td class="plain">Unbridled account (not personal)</td></tr>
+        <tr><td class="plain">beunbridled.ai Zone ID</td><td>05abc6ddffdbe1376868a1a7d73b8071</td><td class="plain">For DNS record management</td></tr>
+        <tr><td class="plain">Default server location</td><td>ash</td><td class="plain">Ashburn, US East — always</td></tr>
+        <tr><td class="plain">Starter tier</td><td>ccx13 → cpx21 fallback</td><td class="plain">cpx21 if dedicated core quota exceeded</td></tr>
+        <tr><td class="plain">Standard tier</td><td>ccx23 → cpx41 fallback</td><td class="plain">cpx41 if dedicated core quota exceeded</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Open Items -->
+    <div class="section-header"><h2>Open Items</h2></div>
+    <div class="open-items">
+      <div class="open-item">
+        <div class="dot"></div>
+        <span class="agent-tag">jfarr2000</span>
+        <p>Sudo password unknown — hermes user password was randomly generated at provision time. Use Hetzner VNC console + root password <code>T7S?BfXnzoae</code> for any sudo commands needed.</p>
+      </div>
+      <div class="open-item">
+        <div class="dot"></div>
+        <span class="agent-tag">jfarr2000</span>
+        <p>IDS security feature pending: run <code>sudo usermod -aG adm hermes</code> then restart hermes-ids.service via Hetzner VNC console.</p>
+      </div>
+      <div class="open-item">
+        <div class="dot"></div>
+        <span class="agent-tag">Grand Poobah</span>
+        <p>Obsidian Sync pending — ob login requires interactive SSH session. Optional but recommended.</p>
+      </div>
+      <div class="open-item">
+        <div class="dot"></div>
+        <span class="agent-tag">Wealth Commander</span>
+        <p>Obsidian Sync pending — ob login requires interactive SSH session once Jonathan confirms Obsidian account details.</p>
+      </div>
+      <div class="open-item">
+        <div class="dot"></div>
+        <span class="agent-tag">Wealth Commander</span>
+        <p>Upgrade from CPX21 → CCX13 when Hetzner dedicated core quota increases. No rebuild needed — resize via Hetzner console.</p>
+      </div>
+    </div>
+
+    <!-- Subdomains -->
+    <div class="section-header"><h2>Active Subdomains — beunbridled.ai</h2></div>
+    <table class="infra-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr><th>Subdomain</th><th>CF Pages Project</th><th>Purpose</th><th>Indexed</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://beunbridled.ai" target="_blank" style="color:var(--teal)">beunbridled.ai</a></td><td>beunbridled</td><td class="plain">Main product site</td><td class="plain">Yes</td></tr>
+        <tr><td><a href="https://wealth.beunbridled.ai" target="_blank" style="color:var(--teal)">wealth.beunbridled.ai</a></td><td>wealth-commander</td><td class="plain">Unbridled Wealth tools</td><td class="plain">No</td></tr>
+        <tr><td><a href="https://beunbridled.ai/dashboard" target="_blank" style="color:var(--teal)">beunbridled.ai/dashboard</a></td><td>beunbridled</td><td class="plain">This page — Agent Command Center</td><td class="plain">No</td></tr>
+      </tbody>
+    </table>
+
+  </main>
+
+  <footer>
+    <p>BeUnbridled Agent Command Center · Internal use only · Not indexed</p>
+    <p>Maintained by MC · Updated on every agent deployment</p>
+  </footer>
+
+</div>
+
+<script>
+  const PASSWORD = 'beunbridled2000';
+  const SESSION_KEY = 'beu_acc_auth';
+
+  // Check if already authenticated this session
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+
+  function checkPassword() {
+    const val = document.getElementById('pw-input').value;
+    if (val === PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      document.getElementById('login-overlay').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+    } else {
+      document.getElementById('pw-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-overlay').style.display = 'flex';
+    document.getElementById('pw-input').value = '';
+  }
+
+  // Allow Enter key on password field
+  document.getElementById('pw-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+</script>
+
+</body>
+</html>
