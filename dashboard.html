@@ -354,6 +354,77 @@
 
     .detail-val a:hover { text-decoration: underline; }
 
+    /* ── IP COPY ───────────────────────────────────── */
+    .ip-copy {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.15s;
+    }
+    .ip-copy:hover { color: var(--teal); }
+    .ip-copy::after {
+      content: '⎘';
+      font-size: 0.7rem;
+      color: var(--muted);
+      opacity: 0.6;
+    }
+    .ip-copy:hover::after { color: var(--teal); opacity: 1; }
+    .ip-copy.copied { color: var(--green) !important; }
+    .ip-copy.copied::after { content: '✓'; color: var(--green) !important; opacity: 1; }
+
+    /* ── BACKUP / SCAN ROWS ────────────────────────── */
+    .backup-ok  { color: var(--green); font-size: 0.7rem; font-weight: 600; }
+    .backup-fail{ color: var(--red);   font-size: 0.7rem; font-weight: 600; }
+    .backup-na  { color: var(--muted); font-size: 0.7rem; }
+    .scan-date  { color: var(--muted); font-size: 0.7rem; }
+
+    /* ── SKILLS GRID ───────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+    }
+    .skill-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+    .skill-pill:hover { border-color: rgba(61,232,200,0.25); }
+    .skill-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .skill-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .skill-desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .skill-cat {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      background: rgba(61,232,200,0.07);
+      border: 1px solid rgba(61,232,200,0.15);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      margin-left: auto;
+      flex-shrink: 0;
+      align-self: flex-start;
+      white-space: nowrap;
+    }
+
     .card-tags {
       display: flex;
       flex-wrap: wrap;
@@ -504,7 +575,7 @@
     <div class="header-brand">Be<span>Unbridled</span> &nbsp;·&nbsp; Agent Command Center</div>
     <div class="header-meta">
       <span class="badge">Internal · Private</span>
-      <span class="updated">Last updated: May 19, 2026</span>
+      <span class="updated">Last updated: May 20, 2026</span>
       <button class="logout-btn" onclick="logout()">Lock ↩</button>
     </div>
   </header>
@@ -513,16 +584,45 @@
 
     <!-- Stats -->
     <div class="stats-strip">
-      <div class="stat"><div class="val">5</div><div class="lbl">Agents Deployed</div></div>
-      <div class="stat"><div class="val">5</div><div class="lbl">Live</div></div>
+      <div class="stat"><div class="val">6</div><div class="lbl">Agents Deployed</div></div>
+      <div class="stat"><div class="val">6</div><div class="lbl">Live</div></div>
       <div class="stat"><div class="val">3</div><div class="lbl">External Clients</div></div>
-      <div class="stat"><div class="val">2</div><div class="lbl">Internal Vertical</div></div>
+      <div class="stat"><div class="val">3</div><div class="lbl">Internal Vertical</div></div>
       <div class="stat"><div class="val">$2,750</div><div class="lbl">MRR</div></div>
     </div>
 
     <!-- Agent Cards -->
     <div class="section-header"><h2>Active Agents</h2></div>
     <div class="agent-grid">
+
+      <!-- MC (master server) -->
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">MC</div>
+            <div class="agent-client">Master of Ceremonies — Unbridled HQ</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">mc-hermes</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.101.101')">5.161.101.101</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX23 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">—</span></div>
+            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">mc-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span> &nbsp;<span class="backup-na">+ Weekly Sun 4am</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled — add hermes-security skill</span></span></div>
+            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 7, 2026</span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Orchestrator</span>
+            <span class="tag">All Skills</span>
+            <span class="tag">Obsidian ✓</span>
+            <span class="tag">Google Ads ✓</span>
+          </div>
+        </div>
+      </div>
 
       <!-- Ruby -->
       <div class="agent-card">
@@ -536,11 +636,13 @@
         <div class="card-body">
           <div class="detail-rows">
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-ruby</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.250.189</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.250.189')">5.161.250.189</span></span></div>
             <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@jennytfarr bot</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@StCloudRubyBot</span></div>
             <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8503827194</span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">ruby-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
             <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 11, 2026</span></div>
             <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
           </div>
@@ -565,16 +667,21 @@
         <div class="card-body">
           <div class="detail-rows">
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-jfarr2000</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.238.200</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.238.200')">5.161.238.200</span></span></div>
             <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@jfarr_2000_bot</span></div>
             <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8221308132</span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">jfarr2000-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
             <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 12, 2026</span></div>
             <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">Infrastructure</span>
             <span class="tag">AI Ops</span>
+            <span class="tag">Voice PWA ✓</span>
+            <span class="tag">SMS ✓</span>
             <span class="tag">Obsidian ✓</span>
           </div>
         </div>
@@ -592,10 +699,13 @@
         <div class="card-body">
           <div class="detail-rows">
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-grand-poobah-new</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.214.45</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.214.45')">5.161.214.45</span></span></div>
             <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@GrandPoobahBot</span></div>
             <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8831016502</span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">grand-poobah-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
             <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 13, 2026</span></div>
             <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">Internal</span></div>
           </div>
@@ -619,11 +729,13 @@
         <div class="card-body">
           <div class="detail-rows">
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-mc-pp-ccx13</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.206.42</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.206.42')">5.161.206.42</span></span></div>
             <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
             <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@Unbridled_p_and_p_bot</span></div>
             <div class="detail-row"><span class="detail-key">TG IDs</span><span class="detail-val">8175218451 · 8853437957</span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">mc-pp-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
             <div class="detail-row"><span class="detail-key">Migrated</span><span class="detail-val plain">May 20, 2026</span></div>
           </div>
           <div class="card-tags">
@@ -645,18 +757,21 @@
         <div class="card-body">
           <div class="detail-rows">
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-wealth-commander-new</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val">5.161.207.78</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.207.78')">5.161.207.78</span></span></div>
             <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
             <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@wealth_commander_bot</span></div>
             <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">6064590731</span></div>
             <div class="detail-row"><span class="detail-key">Web</span><span class="detail-val"><a href="https://wealth.beunbridled.ai" target="_blank">wealth.beunbridled.ai ↗</a></span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">wealth-commander-hermes-hetzner-backups</span></div>
+            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
             <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 19, 2026</span></div>
             <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$1,000 / mo</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">Financial Services</span>
             <span class="tag">Life Insurance</span>
+            <span class="tag">Trello ✓</span>
             <span class="tag">Unbridled Family</span>
           </div>
         </div>
@@ -732,6 +847,76 @@
 
   </main>
 
+  <!-- ── SKILLS SECTIONS ─────────────────────────────── -->
+  <main style="max-width:1300px;margin:0 auto;padding:0 clamp(1.5rem,5vw,3rem) clamp(1.5rem,4vw,3rem);">
+
+    <!-- Unbridled Custom Skills -->
+    <div class="section-header"><h2>Unbridled Custom Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-pill"><span class="skill-icon">🤖</span><div><div class="skill-name">beunbridled-onboarding</div><div class="skill-desc">Complete process for onboarding a new BeUnbridled customer — server provisioning through live agent</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🏨</span><div><div class="skill-name">cloudbeds-integration</div><div class="skill-desc">Connect Hermes to the Cloudbeds PMS API — reservations, guests, properties</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎙️</span><div><div class="skill-name">hermes-voice-pwa</div><div class="skill-desc">Build and deploy the MC Voice push-to-talk PWA — relay server, STT, TTS, nginx, SSL</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">👥</span><div><div class="skill-name">multi-user-hermes-setup</div><div class="skill-desc">Design and onboard multiple users on a single Hermes instance — roles, allowlists, pairing</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">📊</span><div><div class="skill-name">unbridled-ads-analyst</div><div class="skill-desc">Google Ads performance analyst — pull live data, spot trends, flag issues, report to Stan</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">✍️</span><div><div class="skill-name">unbridled-ads-copywriter</div><div class="skill-desc">Google Ads and landing page copywriter — headlines, descriptions, extensions, A/B variants</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">♟️</span><div><div class="skill-name">unbridled-ads-strategist</div><div class="skill-desc">Google Ads strategist — audits, campaign structure, budget allocation, bid strategy</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">📖</span><div><div class="skill-name">unbridled-book-project</div><div class="skill-desc">Author, edit, and publish The Unbridled Way — voice-to-prose, chapter drafts, deployment</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🔍</span><div><div class="skill-name">unbridled-brand-reviewer</div><div class="skill-desc">Content production and brand quality gate — voice, tone, visual standards, approval checklist</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🚀</span><div><div class="skill-name">unbridled-deploy-agent</div><div class="skill-desc">Final deployment of QA-approved web assets — git push, wrangler deploy, DNS, verification</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🏩</span><div><div class="skill-name">unbridled-hospitality-tools</div><div class="skill-desc">Build interactive hospitality tools — rate calculators, booking flows, staff resources</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">⚖️</span><div><div class="skill-name">unbridled-legal</div><div class="skill-desc">Legal drafting and review — NDAs, contracts, M&A docs — zero-retention Venice routing</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎪</span><div><div class="skill-name">unbridled-live-events-ecosystem</div><div class="skill-desc">Build and maintain the Live Events Ecosystem OS — 6 brands, org structure, SOPs</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">📝</span><div><div class="skill-name">unbridled-meeting-notes</div><div class="skill-desc">Meeting notes and daily briefings — transcribe, summarize, extract action items, publish</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">📈</span><div><div class="skill-name">unbridled-ops-tracker</div><div class="skill-desc">Build and maintain live operational dashboards and to-do trackers for the ecosystem</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎬</span><div><div class="skill-name">unbridled-production-runsheet</div><div class="skill-desc">Build live production runsheets for Unbridled Productions events — schedules, cues, contacts</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🌐</span><div><div class="skill-name">unbridled-web-builder</div><div class="skill-desc">Build and deploy production-ready web pages — brand-accurate HTML, Cloudflare Pages, noindex</div></div><span class="skill-cat">Unbridled</span></div>
+      <div class="skill-pill"><span class="skill-icon">🧠</span><div><div class="skill-name">voice-brainstorm</div><div class="skill-desc">Guided voice brainstorming sessions — question-answer flow, STT/TTS, summary at end</div></div><span class="skill-cat">Unbridled</span></div>
+    </div>
+
+    <!-- Pre-Built Hermes Skills -->
+    <div class="section-header"><h2>Pre-Built Hermes Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-pill"><span class="skill-icon">🤖</span><div><div class="skill-name">hermes-agent</div><div class="skill-desc">Configure, extend, or contribute to Hermes Agent — CLI, gateway, platforms, config</div></div><span class="skill-cat">Agents</span></div>
+      <div class="skill-pill"><span class="skill-icon">💻</span><div><div class="skill-name">claude-code</div><div class="skill-desc">Delegate coding tasks to Claude Code CLI — features, PRs, code review</div></div><span class="skill-cat">Agents</span></div>
+      <div class="skill-pill"><span class="skill-icon">💻</span><div><div class="skill-name">codex</div><div class="skill-desc">Delegate coding to OpenAI Codex CLI</div></div><span class="skill-cat">Agents</span></div>
+      <div class="skill-pill"><span class="skill-icon">👥</span><div><div class="skill-name">multi-agent-team-design</div><div class="skill-desc">Design lean, effective multi-agent teams for complex workstreams</div></div><span class="skill-cat">Agents</span></div>
+      <div class="skill-pill"><span class="skill-icon">🏗️</span><div><div class="skill-name">architecture-diagram</div><div class="skill-desc">Dark-themed SVG architecture and infra diagrams as HTML</div></div><span class="skill-cat">Creative</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎨</span><div><div class="skill-name">claude-design</div><div class="skill-desc">Design one-off HTML artifacts — landing pages, decks, prototypes</div></div><span class="skill-cat">Creative</span></div>
+      <div class="skill-pill"><span class="skill-icon">✏️</span><div><div class="skill-name">excalidraw</div><div class="skill-desc">Hand-drawn Excalidraw JSON diagrams — arch, flow, sequence</div></div><span class="skill-cat">Creative</span></div>
+      <div class="skill-pill"><span class="skill-icon">🖼️</span><div><div class="skill-name">popular-web-designs</div><div class="skill-desc">54 real design systems (Stripe, Linear, Vercel) as HTML/CSS templates</div></div><span class="skill-cat">Creative</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎵</span><div><div class="skill-name">songwriting-and-ai-music</div><div class="skill-desc">Songwriting craft and Suno AI music prompts</div></div><span class="skill-cat">Creative</span></div>
+      <div class="skill-pill"><span class="skill-icon">☁️</span><div><div class="skill-name">cloudflare-pages</div><div class="skill-desc">Deploy and manage Cloudflare Pages — create projects, custom domains, DNS</div></div><span class="skill-cat">DevOps</span></div>
+      <div class="skill-pill"><span class="skill-icon">🔒</span><div><div class="skill-name">hermes-security</div><div class="skill-desc">Security audit and penetration testing for Hermes AI agent servers</div></div><span class="skill-cat">DevOps</span></div>
+      <div class="skill-pill"><span class="skill-icon">🖥️</span><div><div class="skill-name">hetzner-hermes-vps-setup</div><div class="skill-desc">Complete guide to provisioning a new Hetzner VPS and installing Hermes</div></div><span class="skill-cat">DevOps</span></div>
+      <div class="skill-pill"><span class="skill-icon">💾</span><div><div class="skill-name">server-backup-dr</div><div class="skill-desc">Backup and disaster recovery — B2 backups, restic, restore runbooks</div></div><span class="skill-cat">DevOps</span></div>
+      <div class="skill-pill"><span class="skill-icon">🪝</span><div><div class="skill-name">webhook-subscriptions</div><div class="skill-desc">Webhook subscriptions: event-driven agent runs from external services</div></div><span class="skill-cat">DevOps</span></div>
+      <div class="skill-pill"><span class="skill-icon">💰</span><div><div class="skill-name">llm-cost-management</div><div class="skill-desc">Diagnose LLM spend, attribute costs, optimize model routing</div></div><span class="skill-cat">DevOps</span></div>
+      <div class="skill-pill"><span class="skill-icon">📧</span><div><div class="skill-name">himalaya</div><div class="skill-desc">Himalaya CLI — IMAP/SMTP email from terminal</div></div><span class="skill-cat">Email</span></div>
+      <div class="skill-pill"><span class="skill-icon">🐙</span><div><div class="skill-name">github-pr-workflow</div><div class="skill-desc">GitHub PR lifecycle — branch, commit, open, CI, merge</div></div><span class="skill-cat">GitHub</span></div>
+      <div class="skill-pill"><span class="skill-icon">🐙</span><div><div class="skill-name">github-issues</div><div class="skill-desc">Create, triage, label, assign GitHub issues via gh CLI or REST</div></div><span class="skill-cat">GitHub</span></div>
+      <div class="skill-pill"><span class="skill-icon">🔌</span><div><div class="skill-name">native-mcp</div><div class="skill-desc">MCP client — connect servers, register tools (stdio/HTTP)</div></div><span class="skill-cat">MCP</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎬</span><div><div class="skill-name">youtube-content</div><div class="skill-desc">YouTube transcripts to summaries, threads, blog posts</div></div><span class="skill-cat">Media</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎙️</span><div><div class="skill-name">voice-memo-transcription</div><div class="skill-desc">Transcribe voice memos and audio files using Whisper</div></div><span class="skill-cat">Media</span></div>
+      <div class="skill-pill"><span class="skill-icon">🎵</span><div><div class="skill-name">spotify</div><div class="skill-desc">Spotify — play, search, queue, manage playlists and devices</div></div><span class="skill-cat">Media</span></div>
+      <div class="skill-pill"><span class="skill-icon">📒</span><div><div class="skill-name">obsidian</div><div class="skill-desc">Read, search, and create notes in the Obsidian vault</div></div><span class="skill-cat">Notes</span></div>
+      <div class="skill-pill"><span class="skill-icon">📊</span><div><div class="skill-name">airtable</div><div class="skill-desc">Airtable REST API via curl — records CRUD, filters, upserts</div></div><span class="skill-cat">Productivity</span></div>
+      <div class="skill-pill"><span class="skill-icon">📅</span><div><div class="skill-name">google-workspace</div><div class="skill-desc">Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python</div></div><span class="skill-cat">Productivity</span></div>
+      <div class="skill-pill"><span class="skill-icon">📋</span><div><div class="skill-name">notion</div><div class="skill-desc">Notion API via curl — pages, databases, blocks, search</div></div><span class="skill-cat">Productivity</span></div>
+      <div class="skill-pill"><span class="skill-icon">✅</span><div><div class="skill-name">trello</div><div class="skill-desc">Trello REST API — boards, lists, cards, members</div></div><span class="skill-cat">Productivity</span></div>
+      <div class="skill-pill"><span class="skill-icon">🗺️</span><div><div class="skill-name">maps</div><div class="skill-desc">Geocode, POIs, routes, timezones via OpenStreetMap/OSRM</div></div><span class="skill-cat">Productivity</span></div>
+      <div class="skill-pill"><span class="skill-icon">📑</span><div><div class="skill-name">powerpoint</div><div class="skill-desc">Create, read, edit .pptx decks, slides, notes, templates</div></div><span class="skill-cat">Productivity</span></div>
+      <div class="skill-pill"><span class="skill-icon">🔎</span><div><div class="skill-name">arxiv</div><div class="skill-desc">Search arXiv papers by keyword, author, category, or ID</div></div><span class="skill-cat">Research</span></div>
+      <div class="skill-pill"><span class="skill-icon">📰</span><div><div class="skill-name">blogwatcher</div><div class="skill-desc">Monitor blogs and RSS/Atom feeds via blogwatcher-cli</div></div><span class="skill-cat">Research</span></div>
+      <div class="skill-pill"><span class="skill-icon">🐦</span><div><div class="skill-name">xurl</div><div class="skill-desc">X/Twitter via xurl CLI — post, search, DM, media, v2 API</div></div><span class="skill-cat">Social</span></div>
+      <div class="skill-pill"><span class="skill-icon">🔧</span><div><div class="skill-name">systematic-debugging</div><div class="skill-desc">4-phase root cause debugging — understand bugs before fixing</div></div><span class="skill-cat">Dev</span></div>
+      <div class="skill-pill"><span class="skill-icon">📐</span><div><div class="skill-name">plan</div><div class="skill-desc">Plan mode — write markdown implementation plan before executing</div></div><span class="skill-cat">Dev</span></div>
+      <div class="skill-pill"><span class="skill-icon">🧪</span><div><div class="skill-name">test-driven-development</div><div class="skill-desc">TDD — enforce RED-GREEN-REFACTOR, tests before code</div></div><span class="skill-cat">Dev</span></div>
+      <div class="skill-pill"><span class="skill-icon">💡</span><div><div class="skill-name">spike</div><div class="skill-desc">Throwaway experiments to validate an idea before full build</div></div><span class="skill-cat">Dev</span></div>
+      <div class="skill-pill"><span class="skill-icon">💬</span><div><div class="skill-name">yuanbao</div><div class="skill-desc">Yuanbao (元宝) groups — @mention users, query info and members</div></div><span class="skill-cat">Other</span></div>
+    </div>
+
+  </main>
+
   <footer>
     <p>BeUnbridled Agent Command Center · Internal use only · Not indexed</p>
     <p>Maintained by MC · Updated on every agent deployment</p>
@@ -742,6 +927,21 @@
 <script>
   const PASSWORD = 'beunbridled2000';
   const SESSION_KEY = 'beu_acc_auth';
+
+  function copyIP(el, ip) {
+    navigator.clipboard.writeText(ip).then(() => {
+      el.classList.add('copied');
+      setTimeout(() => el.classList.remove('copied'), 1800);
+    }).catch(() => {
+      // Fallback for non-HTTPS
+      const ta = document.createElement('textarea');
+      ta.value = ip; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      el.classList.add('copied');
+      setTimeout(() => el.classList.remove('copied'), 1800);
+    });
+  }
 
   // Check if already authenticated this session
   if (sessionStorage.getItem(SESSION_KEY) === '1') {
