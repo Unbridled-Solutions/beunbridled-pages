@@ -482,7 +482,60 @@
     .infra-table tr:last-child td { border-bottom: none; }
     .infra-table tr:hover td { background: rgba(255,255,255,0.02); }
 
-    /* ── OPEN ITEMS ────────────────────────────────── */
+    /* ── SECURITY SECTION ──────────────────────────────── */
+    .security-posture {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .posture-stat { background: var(--surface); padding: 1.1rem 1.25rem; text-align: center; }
+    .posture-stat .p-val { font-size: 1.6rem; font-weight: 700; line-height: 1; margin-bottom: 0.25rem; }
+    .posture-stat .p-lbl { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .p-green { color: var(--green); }
+    .p-teal  { color: var(--teal); }
+    .p-gold  { color: var(--gold); }
+    .p-red   { color: var(--red); }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .sec-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .sec-card-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .sec-card-title { font-size: 0.85rem; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: 0.5rem; }
+    .sec-badge { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.2rem 0.55rem; border-radius: 100px; }
+    .sec-badge-weekly  { background: rgba(61,232,200,0.1);  color: var(--teal);  border: 1px solid rgba(61,232,200,0.25); }
+    .sec-badge-monthly { background: rgba(90,139,167,0.12); color: var(--blue);  border: 1px solid rgba(90,139,167,0.3); }
+    .sec-badge-daily   { background: rgba(76,175,125,0.12); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }
+    .sec-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .sec-checks { display: flex; flex-direction: column; gap: 0.3rem; }
+    .sec-check { font-size: 0.75rem; color: var(--text); display: flex; align-items: baseline; gap: 0.4rem; }
+    .sec-check::before { content: '✓'; color: var(--teal); font-size: 0.7rem; flex-shrink: 0; }
+    .sec-meta { font-size: 0.72rem; color: var(--muted); padding-top: 0.6rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .sec-meta .next { color: var(--teal); }
+
+    .hardening-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+    }
+    .hardening-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.65rem; font-size: 0.8rem; }
+    .h-icon { font-size: 1rem; flex-shrink: 0; }
+    .h-label { color: var(--text); font-weight: 500; }
+    .h-status { margin-left: auto; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+    .h-ok   { color: var(--green); }
+    .h-warn { color: var(--gold); }
+    .h-na   { color: var(--muted); }
+
+    /* ── OPEN ITEMS ──────────────────────────────────────────── */
     .open-items {
       background: var(--card);
       border: 1px solid var(--border);
@@ -575,7 +628,7 @@
     <div class="header-brand">Be<span>Unbridled</span> &nbsp;·&nbsp; Agent Command Center</div>
     <div class="header-meta">
       <span class="badge">Internal · Private</span>
-      <span class="updated">Last updated: May 20, 2026</span>
+      <span class="updated">Last updated: May 21, 2026</span>
       <button class="logout-btn" onclick="logout()">Lock ↩</button>
     </div>
   </header>
@@ -612,7 +665,7 @@
             <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">—</span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">mc-hermes-hetzner-backups</span></div>
             <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span> &nbsp;<span class="backup-na">+ Weekly Sun 4am</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled — add hermes-security skill</span></span></div>
+            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="backup-ok">✓ Weekly audit · Monthly pentest · Daily health</span></span></div>
             <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 7, 2026</span></div>
           </div>
           <div class="card-tags">
@@ -849,6 +902,128 @@
 
   <!-- ── SKILLS SECTIONS ─────────────────────────────── -->
   <main style="max-width:1300px;margin:0 auto;padding:0 clamp(1.5rem,5vw,3rem) clamp(1.5rem,4vw,3rem);">
+
+    <!-- ── SECURITY ─────────────────────────────────────── -->
+    <div class="section-header"><h2>🔐 Security</h2></div>
+
+    <!-- Posture Stats Strip -->
+    <div class="security-posture">
+      <div class="posture-stat">
+        <div class="p-val p-green">✓</div>
+        <div class="p-lbl">Audit Status</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-green">Active</div>
+        <div class="p-lbl">Fail2ban</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-green">On</div>
+        <div class="p-lbl">UFW Firewall</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-teal">Keys Only</div>
+        <div class="p-lbl">SSH Auth</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-green">On</div>
+        <div class="p-lbl">Secret Redaction</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-teal">Dedicated</div>
+        <div class="p-lbl">CPU Isolation</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-teal">B2 + Restic</div>
+        <div class="p-lbl">Encrypted Backups</div>
+      </div>
+      <div class="posture-stat">
+        <div class="p-val p-teal">3</div>
+        <div class="p-lbl">Security Crons</div>
+      </div>
+    </div>
+
+    <!-- Security Cron Cards -->
+    <div class="security-grid">
+
+      <div class="sec-card">
+        <div class="sec-card-header">
+          <div class="sec-card-title">🔍 Security Audit</div>
+          <span class="sec-badge sec-badge-weekly">Weekly</span>
+        </div>
+        <div class="sec-desc">Read-only scan of mc-hermes. Reports findings to Telegram — never auto-remediates.</div>
+        <div class="sec-checks">
+          <div class="sec-check">SSH hardening (PermitRoot, PasswordAuth)</div>
+          <div class="sec-check">UFW firewall status</div>
+          <div class="sec-check">Fail2ban active</div>
+          <div class="sec-check">Unexpected public ports</div>
+          <div class="sec-check">Session file permissions</div>
+          <div class="sec-check">API key exposure in transcripts</div>
+          <div class="sec-check">.env file permissions</div>
+          <div class="sec-check">redact_secrets config</div>
+        </div>
+        <div class="sec-meta">
+          <span>Cron: d33a7c51ed7c</span>
+          <span class="next">Mon 9am UTC</span>
+        </div>
+      </div>
+
+      <div class="sec-card">
+        <div class="sec-card-header">
+          <div class="sec-card-title">🛡️ Monthly Pentest</div>
+          <span class="sec-badge sec-badge-monthly">Monthly</span>
+        </div>
+        <div class="sec-desc">Deeper read-only scan. Memory, disk, service exposure, transcript age, and cron health.</div>
+        <div class="sec-checks">
+          <div class="sec-check">Services exposed on 0.0.0.0 (unexpected)</div>
+          <div class="sec-check">SUID/SGID binary count</div>
+          <div class="sec-check">Session transcript prune check (&gt;30 days)</div>
+          <div class="sec-check">Gateway memory pressure</div>
+          <div class="sec-check">Disk utilization</div>
+          <div class="sec-check">Raw API key pattern scan in sessions</div>
+          <div class="sec-check">Cron job count sanity</div>
+        </div>
+        <div class="sec-meta">
+          <span>Cron: 6efd94443f96</span>
+          <span class="next">1st of month 9am UTC</span>
+        </div>
+      </div>
+
+      <div class="sec-card">
+        <div class="sec-card-header">
+          <div class="sec-card-title">💓 Gateway Health</div>
+          <span class="sec-badge sec-badge-daily">Daily</span>
+        </div>
+        <div class="sec-desc">Silent unless something's wrong. Fires only on anomaly — no noise when healthy.</div>
+        <div class="sec-checks">
+          <div class="sec-check">Gateway process running</div>
+          <div class="sec-check">Memory &lt; 13GB threshold</div>
+          <div class="sec-check">Disk &lt; 80% capacity</div>
+        </div>
+        <div class="sec-meta">
+          <span>Cron: df4d12f039f4</span>
+          <span class="next">Daily 8am UTC</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hardening Checklist -->
+    <div class="hardening-grid">
+      <div class="hardening-item"><span class="h-icon">🔑</span><span class="h-label">SSH key-only auth</span><span class="h-status h-ok">✓ All servers</span></div>
+      <div class="hardening-item"><span class="h-icon">🚫</span><span class="h-label">Root SSH disabled</span><span class="h-status h-ok">✓ All servers</span></div>
+      <div class="hardening-item"><span class="h-icon">🛡️</span><span class="h-label">UFW firewall</span><span class="h-status h-ok">✓ mc-hermes</span></div>
+      <div class="hardening-item"><span class="h-icon">🔒</span><span class="h-label">Fail2ban</span><span class="h-status h-ok">✓ mc-hermes</span></div>
+      <div class="hardening-item"><span class="h-icon">🧹</span><span class="h-label">Secret redaction</span><span class="h-status h-ok">✓ All agents</span></div>
+      <div class="hardening-item"><span class="h-icon">💾</span><span class="h-label">Encrypted B2 backups</span><span class="h-status h-ok">✓ All servers</span></div>
+      <div class="hardening-item"><span class="h-icon">🔐</span><span class="h-label">Session file perms (640)</span><span class="h-status h-ok">✓ mc-hermes</span></div>
+      <div class="hardening-item"><span class="h-icon">🧪</span><span class="h-label">API keys in .env only</span><span class="h-status h-ok">✓ All servers</span></div>
+      <div class="hardening-item"><span class="h-icon">🖥️</span><span class="h-label">Dedicated vCPU isolation</span><span class="h-status h-ok">✓ CCX fleet</span></div>
+      <div class="hardening-item"><span class="h-icon">🌐</span><span class="h-label">All pages noindex</span><span class="h-status h-ok">✓ Enforced</span></div>
+      <div class="hardening-item"><span class="h-icon">🤫</span><span class="h-label">Crons use shell scripts</span><span class="h-status h-ok">✓ Keys never in transcript</span></div>
+      <div class="hardening-item"><span class="h-icon">🔄</span><span class="h-label">SSL auto-renew (certbot)</span><span class="h-status h-ok">✓ jfarr2000</span></div>
+      <div class="hardening-item"><span class="h-icon">⚠️</span><span class="h-label">Security scans — client servers</span><span class="h-status h-warn">⏳ Pending rollout</span></div>
+      <div class="hardening-item"><span class="h-icon">⚠️</span><span class="h-label">UFW/fail2ban — client servers</span><span class="h-status h-warn">⏳ Pending rollout</span></div>
+    </div>
 
     <!-- Unbridled Custom Skills -->
     <div class="section-header"><h2>Unbridled Custom Skills</h2></div>
