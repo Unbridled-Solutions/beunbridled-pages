@@ -662,6 +662,8 @@
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">mc-hermes</span></div>
             <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.101.101')">5.161.101.101</span></span></div>
             <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX23 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Obsidian</span><span class="detail-val plain">✓ Wealth Commander Work Notes</span></div>
+            <div class="detail-row"><span class="detail-key">Dashboard</span><span class="detail-val"><a href="https://wealth.beunbridled.ai/dashboard" target="_blank">wealth.beunbridled.ai/dashboard ↗</a></span></div>
             <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">—</span></div>
             <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">mc-hermes-hetzner-backups</span></div>
             <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span> &nbsp;<span class="backup-na">+ Weekly Sun 4am</span></span></div>
@@ -794,6 +796,7 @@
           <div class="card-tags">
             <span class="tag">Live Events</span>
             <span class="tag">Unbridled Family</span>
+            <span class="tag">Command Center ✓</span>
           </div>
         </div>
       </div>
@@ -811,7 +814,9 @@
           <div class="detail-rows">
             <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-wealth-commander-new</span></div>
             <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.207.78')">5.161.207.78</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX23 · Ashburn</span></div>
+            <div class="detail-row"><span class="detail-key">Obsidian</span><span class="detail-val plain">✓ Wealth Commander Work Notes</span></div>
+            <div class="detail-row"><span class="detail-key">Dashboard</span><span class="detail-val"><a href="https://wealth.beunbridled.ai/dashboard" target="_blank">wealth.beunbridled.ai/dashboard ↗</a></span></div>
             <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@wealth_commander_bot</span></div>
             <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">6064590731</span></div>
             <div class="detail-row"><span class="detail-key">Web</span><span class="detail-val"><a href="https://wealth.beunbridled.ai" target="_blank">wealth.beunbridled.ai ↗</a></span></div>
@@ -826,6 +831,7 @@
             <span class="tag">Life Insurance</span>
             <span class="tag">Trello ✓</span>
             <span class="tag">Unbridled Family</span>
+            <span class="tag">Command Center ✓</span>
           </div>
         </div>
       </div>
@@ -850,8 +856,9 @@
         <tr><td class="plain">CF Account ID</td><td>22e795039bc55fa5f9f8180ec7af3d79</td><td class="plain">Unbridled account (not personal)</td></tr>
         <tr><td class="plain">beunbridled.ai Zone ID</td><td>05abc6ddffdbe1376868a1a7d73b8071</td><td class="plain">For DNS record management</td></tr>
         <tr><td class="plain">Default server location</td><td>ash</td><td class="plain">Ashburn, US East — always</td></tr>
-        <tr><td class="plain">Starter tier</td><td>ccx13 → cpx21 fallback</td><td class="plain">cpx21 if dedicated core quota exceeded</td></tr>
-        <tr><td class="plain">Standard tier</td><td>ccx23 → cpx41 fallback</td><td class="plain">cpx41 if dedicated core quota exceeded</td></tr>
+        <tr><td class="plain">Starter tier</td><td>ccx13</td><td class="plain">2 vCPU / 8GB / 80GB — standard for most clients</td></tr>
+        <tr><td class="plain">Standard tier</td><td>ccx23</td><td class="plain">4 vCPU / 16GB / 160GB — multiple profiles or heavy use</td></tr>
+        <tr><td class="plain">Upgrade path</td><td>Live resize via Hetzner API</td><td class="plain">Snapshot first. No rebuild. ~90s downtime. Gateway .bak fix required after.</td></tr>
       </tbody>
     </table>
 
@@ -876,12 +883,12 @@
       <div class="open-item">
         <div class="dot"></div>
         <span class="agent-tag">Wealth Commander</span>
-        <p>Obsidian Sync pending — ob login requires interactive SSH session once Jonathan confirms Obsidian account details.</p>
+        <p>Financial Planner profile — dedicated Hermes profile for financial planning conversations. CCX23 has headroom. Build when Jonathan green-lights.</p>
       </div>
       <div class="open-item">
         <div class="dot"></div>
-        <span class="agent-tag">Wealth Commander</span>
-        <p>Upgrade from CPX21 → CCX13 when Hetzner dedicated core quota increases. No rebuild needed — resize via Hetzner console.</p>
+        <span class="agent-tag">All Clients</span>
+        <p>client-command-center skill deployed to all 6 agent servers (May 22, 2026). Activate per client when ready — agent reads Business DNA and generates a branded dashboard automatically.</p>
       </div>
     </div>
 
