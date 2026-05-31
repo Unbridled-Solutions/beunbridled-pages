@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeUnbridled AI — DNA Statement</title>
+<style>
+  :root {
+    --dark:   #1A1A2E;
+    --accent: #2E4057;
+    --mid:    #4A6FA5;
+    --light:  #F5F5F0;
+    --quote:  #EEF2F7;
+    --rule:   #C8C8C0;
+    --white:  #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--dark);
+    color: var(--dark);
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  /* ── DECK CONTAINER ── */
+  #deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vw 8vw;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    pointer-events: none;
+    background: var(--white);
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateY(-24px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* ── SLIDE VARIANTS ── */
+  .slide-cover  { background: var(--dark); color: var(--white); align-items: flex-start; justify-content: flex-end; padding-bottom: 7vh; }
+  .slide-dark   { background: var(--accent); color: var(--white); }
+  .slide-light  { background: var(--light); }
+  .slide-white  { background: var(--white); }
+  .slide-mid    { background: var(--mid); color: var(--white); }
+
+  /* ── COVER STYLES ── */
+  .cover-eyebrow {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(10px, 1.1vw, 14px);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1.2rem;
+  }
+  .cover-title {
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 700;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .cover-title span { color: var(--mid); }
+  .cover-sub {
+    font-size: clamp(14px, 1.6vw, 22px);
+    color: #8899BB;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 300;
+    max-width: 600px;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+  }
+  .cover-pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(9px, 0.85vw, 12px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(74,111,165,0.5);
+    color: var(--mid);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+  }
+  .cover-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--mid);
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-num {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(9px, 0.9vw, 12px);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 0.5rem;
+    align-self: flex-start;
+  }
+  .section-num.light { color: rgba(255,255,255,0.5); }
+
+  /* ── HEADINGS ── */
+  h1, h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    line-height: 1.15;
+    align-self: flex-start;
+  }
+  h1 { font-size: clamp(26px, 3.5vw, 50px); color: var(--dark); margin-bottom: 1rem; }
+  h2 { font-size: clamp(20px, 2.5vw, 36px); color: var(--dark); margin-bottom: 0.8rem; }
+  .on-dark h1, .on-dark h2 { color: var(--white); }
+
+  .statement {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(13px, 1.4vw, 19px);
+    font-weight: 600;
+    color: var(--mid);
+    align-self: flex-start;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+  }
+  .on-dark .statement { color: #9ab5d8; }
+
+  /* ── BODY TEXT ── */
+  p.body-text {
+    font-size: clamp(13px, 1.25vw, 17px);
+    line-height: 1.75;
+    color: #3a3a4a;
+    align-self: flex-start;
+    max-width: 820px;
+  }
+  .on-dark p.body-text { color: rgba(255,255,255,0.82); }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    background: var(--quote);
+    border-left: 4px solid var(--mid);
+    padding: 1.4rem 1.8rem;
+    border-radius: 0 6px 6px 0;
+    align-self: flex-start;
+    max-width: 820px;
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+  .quote-block p {
+    font-style: italic;
+    font-size: clamp(12px, 1.2vw, 16px);
+    line-height: 1.75;
+    color: var(--accent);
+  }
+  .on-dark .quote-block {
+    background: rgba(255,255,255,0.08);
+    border-left-color: rgba(255,255,255,0.4);
+  }
+  .on-dark .quote-block p { color: rgba(255,255,255,0.85); }
+
+  /* ── BULLET LIST ── */
+  ul.deck-list {
+    list-style: none;
+    align-self: flex-start;
+    width: 100%;
+    max-width: 820px;
+  }
+  ul.deck-list li {
+    font-size: clamp(12px, 1.2vw, 16px);
+    line-height: 1.6;
+    color: #3a3a4a;
+    padding: 0.5rem 0 0.5rem 1.4rem;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  ul.deck-list li:last-child { border-bottom: none; }
+  ul.deck-list li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--mid);
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  ul.deck-list li b { color: var(--accent); }
+  .on-dark ul.deck-list li { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.1); }
+  .on-dark ul.deck-list li::before { color: #9ab5d8; }
+  .on-dark ul.deck-list li b { color: #c5d8ef; }
+
+  /* ── TWO-COL LAYOUT ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-self: flex-start;
+    width: 100%;
+    max-width: 820px;
+  }
+  .col-left { border-right: 1px solid var(--rule); padding-right: 2rem; }
+
+  /* ── SHIFT TABLE ── */
+  .shift-table {
+    width: 100%;
+    max-width: 820px;
+    border-collapse: collapse;
+    align-self: flex-start;
+  }
+  .shift-table th {
+    background: var(--accent);
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(11px, 1.1vw, 14px);
+    font-weight: 600;
+    padding: 0.7rem 1.2rem;
+    text-align: left;
+    letter-spacing: 0.04em;
+  }
+  .shift-table td {
+    font-size: clamp(11px, 1.1vw, 14px);
+    padding: 0.65rem 1.2rem;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.5;
+  }
+  .shift-table tr:nth-child(even) td { background: var(--light); }
+  .shift-table td:first-child { color: #666; }
+  .shift-table td:last-child { font-family: 'Helvetica Neue', sans-serif; font-weight: 600; color: var(--accent); }
+
+  /* ── VALUES TABLE ── */
+  .values-table {
+    width: 100%;
+    max-width: 820px;
+    border-collapse: collapse;
+    align-self: flex-start;
+    font-size: clamp(10px, 1.05vw, 13px);
+  }
+  .values-table th {
+    background: var(--accent);
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    padding: 0.65rem 0.9rem;
+    text-align: left;
+    letter-spacing: 0.04em;
+  }
+  .values-table td {
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .values-table tr:nth-child(even) td { background: var(--light); }
+  .values-table td:first-child { font-family: 'Helvetica Neue', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .values-table td:last-child { font-style: italic; color: var(--mid); }
+
+  /* ── NORTH STAR ── */
+  .north-star-text {
+    font-family: 'Georgia', serif;
+    font-size: clamp(22px, 3.5vw, 50px);
+    font-style: italic;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.3;
+    max-width: 700px;
+    margin-bottom: 2rem;
+  }
+  .north-star-sub {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(11px, 1.1vw, 15px);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── JOURNEY BANNER ── */
+  .journey {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: clamp(11px, 1.2vw, 16px);
+    font-weight: 600;
+    color: var(--mid);
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-top: 1.2rem;
+    align-self: flex-start;
+  }
+
+  /* ── CLOSING SLIDE ── */
+  .closing-tagline {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: clamp(14px, 1.6vw, 22px);
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+  }
+
+  /* ── NAV ── */
+  #nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 100;
+    background: rgba(26,26,46,0.85);
+    backdrop-filter: blur(8px);
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: color 0.2s;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  .nav-btn:hover { color: white; }
+  .nav-btn:disabled { opacity: 0.25; cursor: default; }
+  #slide-counter {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.45);
+    min-width: 52px;
+    text-align: center;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--mid);
+    transition: width 0.4s ease;
+    z-index: 200;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .slide { padding: 6vw 6vw; justify-content: flex-start; padding-top: 12vw; overflow-y: auto; }
+    .two-col { grid-template-columns: 1fr; }
+    .col-left { border-right: none; border-bottom: 1px solid var(--rule); padding-right: 0; padding-bottom: 1rem; }
+    .values-table th:nth-child(2), .values-table td:nth-child(2) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div id="deck">
+
+  <!-- 1. COVER -->
+  <div class="slide slide-cover active" data-index="0">
+    <div class="cover-bar"></div>
+    <div class="cover-eyebrow">BeUnbridled AI</div>
+    <div class="cover-title">DNA<br><span>Statement</span></div>
+    <div class="cover-sub">Built on the same foundation of character, creativity, credibility, and community — applied to the most transformative technology of our time.</div>
+    <div class="cover-pills">
+      <span class="pill">Mission</span>
+      <span class="pill">Purpose</span>
+      <span class="pill">Vision</span>
+      <span class="pill">Values</span>
+      <span class="pill">Our Stance</span>
+      <span class="pill">Brand Promise</span>
+      <span class="pill">North Star</span>
+    </div>
+  </div>
+
+  <!-- 2. MISSION -->
+  <div class="slide slide-white" data-index="1">
+    <div class="section-num">01 — Mission</div>
+    <h1>Doing Good<br>by Doing Well.</h1>
+    <div class="statement">"With Technology That Serves People."</div>
+    <div class="quote-block">
+      <p>Our mission is to do good in this world by doing well — building a profitable, sustainable AI company that creates meaningful careers where people can unbridle their talents. Profitability is not the point; it is what makes the point possible. A company that cannot sustain itself cannot serve anyone. Our AI systems eliminate busywork — for our clients and for ourselves — so humans can focus on what only humans can do: lead, create, serve, build, and decide.</p>
+    </div>
+  </div>
+
+  <!-- 3. MISSION — OPERATIONALIZE -->
+  <div class="slide slide-light" data-index="2">
+    <div class="section-num">01 — Mission</div>
+    <h2>How We Operationalize It</h2>
+    <ul class="deck-list">
+      <li><b>The work</b> → AI handles the noise. Humans handle the meaning. This applies inside our walls as much as outside them.</li>
+      <li><b>The business</b> → Profitable, sustainable, human-scale. We grow at the speed of trust, not the speed of hype.</li>
+      <li><b>The impact</b> → Every client relationship should increase human agency — including their independence from us when that's what's right.</li>
+    </ul>
+  </div>
+
+  <!-- 4. PURPOSE -->
+  <div class="slide slide-white" data-index="3">
+    <div class="section-num">02 — Purpose</div>
+    <h1>Unleash Authentic<br>Connection.</h1>
+    <div class="statement">"Amplified, Not Replaced."</div>
+    <div class="quote-block">
+      <p>Our purpose is to unleash real, authentic, and meaningful human connection. AI should create more room for that connection, not less. In a world racing to automate everything, we stay grounded in a harder question: Is this making life better? Is this strengthening relationships? Is this giving people more capacity to be present? Asking those questions takes discipline, not slowness — and it is what separates deliberate building from reckless building.</p>
+    </div>
+  </div>
+
+  <!-- 5. VISION -->
+  <div class="slide slide-white" data-index="4">
+    <div class="section-num">03 — Vision</div>
+    <h1>Unbridle Human<br>Purpose and Passion.</h1>
+    <div class="statement">"With AI as the Tool, Not the Goal."</div>
+    <div class="quote-block">
+      <p>Our vision is to create AI systems that amplify human capability without diminishing human responsibility. We hold our own capability loosely: our measure of success is not how dependent clients become on us, but how much more capable they become in their own right. When people are freed from busywork, they don't just perform better — they come alive, and in doing so, they elevate everything and everyone around them.</p>
+    </div>
+  </div>
+
+  <!-- 6. VALUES -->
+  <div class="slide slide-light" data-index="5" style="justify-content:flex-start; padding-top: 6vh;">
+    <div class="section-num">04 — Values</div>
+    <h2 style="margin-bottom:1rem;">"Our Values Drive How We Build AI."</h2>
+    <table class="values-table">
+      <thead>
+        <tr><th>Cornerstone</th><th>What It Means for AI</th><th>Key Behaviors</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lead with Character</td>
+          <td>Build AI that increases human agency, not dependency — on the work or on us. Never automate away accountability.</td>
+          <td>Trustworthy, Hopeful, Influential</td>
+        </tr>
+        <tr>
+          <td>Create the Change</td>
+          <td>Innovate relentlessly — but always in service of human flourishing. Ask "should we?" before "can we?"</td>
+          <td>Flexible, Imaginative, Resourceful</td>
+        </tr>
+        <tr>
+          <td>Expand in Credibility</td>
+          <td>Deliver AI that works. No hype. No overpromises. Clients trust us because we tell the truth — including its limits and ours.</td>
+          <td>Committed, Knowledgeable, Accountable</td>
+        </tr>
+        <tr>
+          <td>Protect Our Community</td>
+          <td>AI should strengthen communities and distribute capability — not concentrate it, including away from us.</td>
+          <td>Engaged, Caring, Inclusive</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="journey">Collaborating in Destiny &nbsp;→&nbsp; Growing in Authenticity &nbsp;→&nbsp; Expanding in Generosity</div>
+  </div>
+
+  <!-- 7. STANCE — ELLUL -->
+  <div class="slide slide-dark on-dark" data-index="6">
+    <div class="section-num light">05 — Our Stance</div>
+    <h1 style="color:white; margin-bottom:1.2rem;">Love Technology.<br>Do Not Worship It.</h1>
+    <div class="quote-block">
+      <p>We share the diagnosis of thinkers like Jacques Ellul, who recognized that the greatest force shaping modern civilization is not capitalism, communism, or politics — it's <strong style="color:white;">the pursuit of maximum efficiency above all else.</strong> Technique. The belief that if something <em>can</em> be automated, it <em>should</em> be.</p>
+    </div>
+    <p class="body-text" style="margin-top:1.2rem; font-family:'Helvetica Neue',sans-serif; font-size:clamp(14px,1.5vw,20px); font-weight:600; color:white;">We share his diagnosis. We reject his despair.<br>The answer isn't to abandon technology — it's to refuse to let it set the terms.</p>
+  </div>
+
+  <!-- 8. STANCE — FLOURISHING QUESTION -->
+  <div class="slide slide-mid on-dark" data-index="7">
+    <div class="section-num light">05 — Our Stance</div>
+    <p style="font-family:'Helvetica Neue',sans-serif; font-size:clamp(11px,1.1vw,14px); letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:1rem; align-self:flex-start;">Most projects start with the wrong question.</p>
+    <div class="two-col" style="max-width:820px;">
+      <div class="col-left" style="border-right-color:rgba(255,255,255,0.15);">
+        <p style="font-family:'Helvetica Neue',sans-serif; font-size:clamp(11px,1.05vw,14px); color:rgba(255,255,255,0.5); margin-bottom:0.5rem; letter-spacing:0.06em; text-transform:uppercase;">Most companies ask:</p>
+        <p style="font-size:clamp(16px,2vw,26px); font-family:'Georgia',serif; font-style:italic; color:rgba(255,255,255,0.65); line-height:1.4;">"What can we automate?"</p>
+      </div>
+      <div>
+        <p style="font-family:'Helvetica Neue',sans-serif; font-size:clamp(11px,1.05vw,14px); color:rgba(255,255,255,0.55); margin-bottom:0.5rem; letter-spacing:0.06em; text-transform:uppercase;">We ask:</p>
+        <p style="font-size:clamp(16px,2vw,26px); font-family:'Georgia',serif; font-style:italic; color:white; line-height:1.4;">"What does a flourishing outcome look like for this person or organization?"</p>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:1.6rem; font-family:'Helvetica Neue',sans-serif; font-size:clamp(12px,1.15vw,16px); font-weight:500; color:rgba(255,255,255,0.8);">Then we ask whether AI even belongs in the answer.<br>Sometimes it doesn't. <em style="color:white;">Saying so is the act.</em></p>
+  </div>
+
