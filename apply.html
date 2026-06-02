@@ -505,7 +505,7 @@
         <main>
             <div class="page-title">
                 <h1>Build your Chief of Staff.</h1>
-                <p class="subtitle">Tell us about yourself and your business. We'll have your agent live within 24 hours.</p>
+                <p class="subtitle">Tell us a little about yourself so we can get started configuring your AI Digital Chief of Staff.</p>
             </div>
 
             <div class="form-card">
@@ -523,13 +523,12 @@
                             <div class="error-message" data-field="fullName"></div>
                         </div>
                         <div class="form-group">
-                            <label for="businessName">Business Name</label>
+                            <label for="businessName">Business Name <span style="font-weight:300;text-transform:none;letter-spacing:normal;font-size:0.75rem;color:var(--fog)">(If applicable)</span></label>
                             <input type="text" id="businessName" name="businessName">
                         </div>
                         <div class="form-group">
-                            <label for="roleTitle">Role/Title<span class="required-asterisk">*</span></label>
-                            <input type="text" id="roleTitle" name="roleTitle" required>
-                            <div class="error-message" data-field="roleTitle"></div>
+                            <label for="roleTitle">Role / Title <span style="font-weight:300;text-transform:none;letter-spacing:normal;font-size:0.75rem;color:var(--fog)">(If applicable)</span></label>
+                            <input type="text" id="roleTitle" name="roleTitle">
                         </div>
                         <div class="form-group">
                             <label for="email">Email<span class="required-asterisk">*</span></label>
@@ -551,6 +550,7 @@
                                 <option value="Technology">Technology</option>
                                 <option value="Finance">Finance</option>
                                 <option value="Healthcare">Healthcare</option>
+                                <option value="Military">Military</option>
                                 <option value="Education">Education</option>
                                 <option value="Marketing">Marketing</option>
                                 <option value="Retail">Retail</option>
@@ -559,22 +559,9 @@
                             <div class="error-message" data-field="industry"></div>
                         </div>
                         <div class="form-group">
-                            <label for="businessDescription">Business Description<span class="required-asterisk">*</span></label>
-                            <textarea id="businessDescription" name="businessDescription" rows="4" required></textarea>
+                            <label for="businessDescription">Business Description <span style="font-weight:300;text-transform:none;letter-spacing:normal;font-size:0.75rem;color:var(--fog)">(If applicable)</span></label>
+                            <textarea id="businessDescription" name="businessDescription" rows="4"></textarea>
                             <div class="helper-text">Briefly describe what your business does.</div>
-                            <div class="error-message" data-field="businessDescription"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="teamSize">Team Size<span class="required-asterisk">*</span></label>
-                            <select id="teamSize" name="teamSize" required>
-                                <option value="">Select team size</option>
-                                <option value="1-5">1-5</option>
-                                <option value="6-20">6-20</option>
-                                <option value="21-100">21-100</option>
-                                <option value="101-500">101-500</option>
-                                <option value="500+">500+</option>
-                            </select>
-                            <div class="error-message" data-field="teamSize"></div>
                         </div>
                         <div class="form-group">
                             <label for="cityTimezone">City/Timezone<span class="required-asterisk">*</span></label>
@@ -591,37 +578,9 @@
                     <div class="form-step" id="step3">
                         <h2>Challenges & Ambitions</h2>
                         <div class="form-group">
-                            <label>Pain Points</label>
-                            <div class="checkbox-group">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="pp_time" name="painPoints" value="Lack of time for strategic tasks">
-                                    <label for="pp_time">Lack of time for strategic tasks</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="pp_overwhelmed" name="painPoints" value="Overwhelmed by operations">
-                                    <label for="pp_overwhelmed">Overwhelmed by operations</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="pp_growth" name="painPoints" value="Struggling with growth initiatives">
-                                    <label for="pp_growth">Struggling with growth initiatives</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="pp_staff" name="painPoints" value="Difficulty scaling staff">
-                                    <label for="pp_staff">Difficulty scaling staff</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="pp_other" name="painPoints" value="Other">
-                                    <label for="pp_other">Other</label>
-                                </div>
-                            </div>
-                            <input type="text" id="painPointsOther" name="painPointsOther" class="other-input" placeholder="Specify other pain points">
-                            <div class="helper-text">Select all that apply. If "Other" is selected, please specify above.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="oneThingChangeWeek">One thing that would change your week<span class="required-asterisk">*</span></label>
-                            <textarea id="oneThingChangeWeek" name="oneThingChangeWeek" rows="3" required></textarea>
-                            <div class="helper-text">What single change would have the biggest positive impact on your week?</div>
-                            <div class="error-message" data-field="oneThingChangeWeek"></div>
+                            <label for="challengesAmbitions">Challenges &amp; Ambitions</label>
+                            <textarea id="challengesAmbitions" name="challengesAmbitions" rows="5" placeholder="e.g. I spend too much time on email, I want to grow my client base, I need help staying on top of follow-ups..."></textarea>
+                            <div class="helper-text">Are there any particular challenges and/or ambitions you'd like to address?</div>
                         </div>
                         <div class="form-navigation">
                             <button type="button" class="btn-back" data-step="3"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg> Back</button>
@@ -633,35 +592,9 @@
                     <div class="form-step" id="step4">
                         <h2>Tools & Workflow</h2>
                         <div class="form-group">
-                            <label>Tools Used</label>
-                            <div class="checkbox-group">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="tool_slack" name="toolsUsed" value="Slack">
-                                    <label for="tool_slack">Slack</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="tool_notion" name="toolsUsed" value="Notion">
-                                    <label for="tool_notion">Notion</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="tool_gsuite" name="toolsUsed" value="Google Workspace">
-                                    <label for="tool_gsuite">Google Workspace</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="tool_ms365" name="toolsUsed" value="Microsoft 365">
-                                    <label for="tool_ms365">Microsoft 365</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="tool_airtable" name="toolsUsed" value="Airtable">
-                                    <label for="tool_airtable">Airtable</label>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" id="tool_other" name="toolsUsed" value="Other">
-                                    <label for="tool_other">Other</label>
-                                </div>
-                            </div>
-                            <input type="text" id="toolsUsedOther" name="toolsUsedOther" class="other-input" placeholder="Specify other tools">
-                            <div class="helper-text">Select all tools your business uses regularly.</div>
+                            <label for="toolsUsed">Tools &amp; Software</label>
+                            <textarea id="toolsUsed" name="toolsUsed" rows="5" placeholder="e.g. Google Workspace, Slack, HubSpot, QuickBooks, Airtable..."></textarea>
+                            <div class="helper-text">List any tools and software you regularly use.</div>
                         </div>
                         <div class="form-navigation">
                             <button type="button" class="btn-back" data-step="4"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg> Back</button>
@@ -669,60 +602,13 @@
                         </div>
                     </div>
 
-                    <!-- Step 5 -->
+                    <!-- Step 5 (Final) -->
                     <div class="form-step" id="step5">
-                        <h2>Brand & Communication</h2>
+                        <h2>Almost Done</h2>
                         <div class="form-group">
-                            <label for="communicationStyle">Ideal Communication Style<span class="required-asterisk">*</span></label>
-                            <select id="communicationStyle" name="communicationStyle" required>
-                                <option value="">Select a style</option>
-                                <option value="Direct and concise">Direct and concise</option>
-                                <option value="Warm and empathetic">Warm and empathetic</option>
-                                <option value="Formal and professional">Formal and professional</option>
-                                <option value="Casual and friendly">Casual and friendly</option>
-                            </select>
-                            <div class="helper-text">How should your AI agent communicate?</div>
-                            <div class="error-message" data-field="communicationStyle"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="brandWords">Brand Words<span class="required-asterisk">*</span></label>
-                            <input type="text" id="brandWords" name="brandWords" placeholder="e.g., innovative, reliable, friendly" required>
-                            <div class="helper-text">Enter 3 comma-separated words that define your brand.</div>
-                            <div class="error-message" data-field="brandWords"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="neverSayDo">Never Say or Do</label>
-                            <textarea id="neverSayDo" name="neverSayDo" rows="3"></textarea>
-                            <div class="helper-text">Are there any phrases, tones, or actions your AI agent should strictly avoid?</div>
-                        </div>
-                        <div class="form-navigation">
-                            <button type="button" class="btn-back" data-step="5"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg> Back</button>
-                            <button type="button" class="btn-next" data-step="5">Next <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
-                        </div>
-                    </div>
-
-                    <!-- Step 6 -->
-                    <div class="form-step" id="step6">
-                        <h2>Final Steps</h2>
-                        <div class="form-group">
-                            <label for="telegramUsername">Telegram Username<span class="required-asterisk">*</span></label>
-                            <input type="text" id="telegramUsername" name="telegramUsername" placeholder="@yourusername" pattern="^@[a-zA-Z0-9_]{5,}$" required>
-                            <div class="helper-text">Used for direct communication with your agent. Must start with '@' and be at least 5 characters.</div>
-                            <div class="error-message" data-field="telegramUsername"></div>
-                        </div>
-                        <div class="form-group">
-                            <label>Server Tier<span class="required-asterisk">*</span></label>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" id="tierStandard" name="serverTier" value="Standard CCX23 $1000/mo" required>
-                                    <label for="tierStandard">Standard CCX23 $1000/mo</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" id="tierStarter" name="serverTier" value="Starter CCX13 $750/mo" required>
-                                    <label for="tierStarter">Starter CCX13 $750/mo</label>
-                                </div>
-                            </div>
-                            <div class="error-message" data-field="serverTier"></div>
+                            <label for="agentName">Agent Name</label>
+                            <input type="text" id="agentName" name="agentName" placeholder="e.g. Max, Alfred, Luna, MC...">
+                            <div class="helper-text">Your AI Chief of Staff can have a name. What would you like to name it?</div>
                         </div>
                         <div class="form-group">
                             <label for="anythingElse">Anything Else?</label>
@@ -802,13 +688,6 @@
                     inputValid = false;
                 } else if (input.type === 'email' && !/\S+@\S+\.\S+/.test(input.value)) {
                     inputValid = false;
-                } else if (input.name === 'telegramUsername' && !/^@[a-zA-Z0-9_]{5,}$/.test(input.value)) {
-                    inputValid = false;
-                } else if (input.name === 'brandWords') {
-                    const words = input.value.split(',').map(s => s.trim()).filter(s => s.length > 0);
-                    if (words.length < 3) {
-                        inputValid = false;
-                    }
                 }
 
                 if (!inputValid) {
@@ -844,19 +723,7 @@
             }
         });
 
-        // "Other" checkbox toggling
-        document.querySelectorAll('input[type="checkbox"][value="Other"]').forEach(checkbox => {
-            const otherInputId = checkbox.id.replace('_other', 'Other');
-            const otherInput = document.getElementById(otherInputId);
-            if (otherInput) {
-                checkbox.addEventListener('change', () => {
-                    otherInput.style.display = checkbox.checked ? 'block' : 'none';
-                    if (!checkbox.checked) {
-                        otherInput.value = ''; // Clear input if unchecked
-                    }
-                });
-            }
-        });
+
 
         // Form submission handling
         form.addEventListener('submit', async (e) => {
@@ -880,21 +747,7 @@
                 }
             });
 
-            // Handle "Other" inputs for checkboxes
-            document.querySelectorAll('input[type="checkbox"][value="Other"]').forEach(checkbox => {
-                const otherInputId = checkbox.id.replace('_other', 'Other');
-                const otherInput = document.getElementById(otherInputId);
-                if (checkbox.checked && otherInput && otherInput.value.trim() !== '') {
-                    const key = checkbox.name;
-                    if (Array.isArray(data[key])) {
-                        // Remove the generic "Other" and add the specific value
-                        data[key] = data[key].filter(item => item !== 'Other');
-                        data[key].push(otherInput.value.trim());
-                    } else if (data[key] === 'Other') {
-                        data[key] = otherInput.value.trim();
-                    }
-                }
-            });
+
 
 
             try {
