@@ -829,13 +829,15 @@
 
         // Navigation buttons event listeners
         form.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-next')) {
+            const nextBtn = e.target.closest('.btn-next');
+            const backBtn = e.target.closest('.btn-back');
+            if (nextBtn) {
                 if (validateStep(currentStep)) {
                     if (currentStep < formSteps.length - 1) {
                         showStep(currentStep + 1);
                     }
                 }
-            } else if (e.target.classList.contains('btn-back')) {
+            } else if (backBtn) {
                 if (currentStep > 0) {
                     showStep(currentStep - 1);
                 }
