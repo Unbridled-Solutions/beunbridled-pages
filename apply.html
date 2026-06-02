@@ -790,17 +790,17 @@
 
             requiredInputs.forEach(input => {
                 let inputValid = true;
-                const errorMessageElement = currentFormStep.querySelector(\`.error-message[data-field="\${input.name}"]\`);
+                const errorMessageElement = currentFormStep.querySelector(`.error-message[data-field="${input.name}"]`);
 
                 if (input.type === 'radio' || input.type === 'checkbox') {
                     const groupName = input.name;
-                    const checkedInputs = currentFormStep.querySelectorAll(\`input[name="\${groupName}"]:checked\`);
+                    const checkedInputs = currentFormStep.querySelectorAll(`input[name="${groupName}"]:checked`);
                     if (checkedInputs.length === 0) {
                         inputValid = false;
                     }
                 } else if (input.value.trim() === '') {
                     inputValid = false;
-                } else if (input.type === 'email' && !/\\S+@\\S+\\.\\S+/.test(input.value)) {
+                } else if (input.type === 'email' && !/\S+@\S+\.\S+/.test(input.value)) {
                     inputValid = false;
                 } else if (input.name === 'telegramUsername' && !/^@[a-zA-Z0-9_]{5,}$/.test(input.value)) {
                     inputValid = false;
@@ -814,7 +814,7 @@
                 if (!inputValid) {
                     isValid = false;
                     if (errorMessageElement) {
-                        errorMessageElement.textContent = \`This field is required.\`; // Generic error message
+                        errorMessageElement.textContent = `This field is required.`; // Generic error message
                         errorMessageElement.style.display = 'block';
                     }
                 } else {
@@ -931,7 +931,7 @@
                         value = value.join(', ');
                     }
                     const p = document.createElement('p');
-                    p.innerHTML = \`<strong>\${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</strong> \${value}\`;
+                    p.innerHTML = `<strong>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</strong> ${value}`;
                     submissionSummaryContent.appendChild(p);
                 }
             }
