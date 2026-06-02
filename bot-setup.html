@@ -1,230 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Your Agent's Telegram Bot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Bot Setup · BeUnbridled.ai</title>
     <style>
-        :root {
-            --navy: #1a2535;
-            --blue: #5a8ba7;
-            --cream: #f0ede6;
+        /* Font-face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('./AzoSans-Thin.woff2') format('woff2');
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--cream);
-            color: var(--navy);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('./AzoSans-Light.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
         }
-
-        .container {
-            max-width: 700px;
-            width: 100%;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            padding: 30px 20px;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            color: var(--navy);
-            text-align: center;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        h2.subtitle {
-            color: var(--blue);
-            text-align: center;
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('./AzoSans-Regular.woff2') format('woff2');
             font-weight: 400;
-            font-size: 1.1em;
-            margin-top: 0;
-            margin-bottom: 30px;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('./AzoSans-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('./AzoSans-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
         }
 
-        .step {
+        /* Palette Tokens */
+        :root {
+            --deepest-blue: #001c28;
+            --deep-blue: #2d4654;
+            --dark-blue: #396889;
+            --brand-blue: #5a8ba7;
+            --light-blue: #78b0d1;
+            --fog: #a6bbc8;
+            --surface: rgba(90, 139, 167, 0.07);
+            --border: rgba(90, 139, 167, 0.2);
+            --text: #F8FAFC;
+            --muted: var(--fog);
+            --font: 'Azo Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font);
+            background-color: var(--deepest-blue);
+            color: var(--text);
+            line-height: 1.5;
+            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scroll from glows */
+        }
+
+        /* Ambient Glows */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            filter: blur(80px); /* For a soft glow effect */
+            opacity: 0.7;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        body::before {
+            top: 0%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle at center, rgba(90, 139, 167, 0.12) 0%, transparent 70%);
+        }
+
+        body::after {
+            bottom: 5%;
+            right: 0%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle at center, rgba(45, 70, 84, 0.5) 0%, transparent 60%);
+            transform: translate(50%, 50%);
+        }
+
+        a {
+            color: var(--brand-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--light-blue);
+        }
+
+        code {
+            background-color: rgba(90, 139, 167, 0.15);
+            color: var(--light-blue);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95em;
+        }
+
+        /* Layout */
+        .page-wrap {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            z-index: 1;
+            position: relative; /* Ensure it stays on top of glows */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        header .logo {
+            height: 28px;
+            vertical-align: middle;
+        }
+
+        header .wordmark {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fog);
+        }
+
+        header .badge {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        /* Titles */
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        .warning-card {
+            border-left: 3px solid var(--brand-blue);
+            padding-left: calc(clamp(1.5rem, 4vw, 2.5rem) - 3px); /* Adjust padding to keep alignment */
+        }
+
+        /* Step Design */
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 25px;
+            gap: 1.25rem;
         }
 
         .step-number {
             flex-shrink: 0;
-            width: 30px;
-            height: 30px;
-            background-color: var(--blue);
-            color: #ffffff;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background-color: var(--brand-blue);
+            color: var(--deepest-blue);
+            font-weight: 700;
+            font-size: 1.1rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: 700;
-            font-size: 1.1em;
-            margin-right: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .step-content {
             flex-grow: 1;
         }
 
-        .step-content h3 {
-            color: var(--navy);
+        .step-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text);
             margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 1.2em;
-            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .step-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .step-body {
+            font-size: 0.92rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.7;
         }
 
-        .step-content ul li {
-            margin-bottom: 5px;
-            padding-left: 0;
-            position: relative;
+        .step-divider {
+            border-top: 1px solid var(--border);
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .note-box {
-            background-color: var(--cream);
-            border-left: 5px solid var(--blue);
-            padding: 15px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            border-radius: 4px;
-            font-size: 0.95em;
-        }
-
-        .note-box p {
-            margin: 0;
-            color: var(--navy);
-        }
-
-        .youre-done {
+        /* Footer */
+        footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--cream);
-        }
-
-        .youre-done p {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: var(--navy);
-        }
-
-        code {
-            background-color: #f0f0f0;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-            font-size: 0.9em;
-        }
-
-        a {
-            color: var(--blue);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-            }
-            h1 {
-                font-size: 1.8em;
-            }
-            h2.subtitle {
-                font-size: 1em;
-            }
-            .step-number {
-                width: 25px;
-                height: 25px;
-                font-size: 1em;
-                margin-right: 10px;
-            }
-            .step-content h3 {
-                font-size: 1.1em;
-            }
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="page-wrap">
+        <header>
+            <a href="/apply">
+                <img src="https://offers.hotelstcloud.com/assets/logos/unbridled-elk-icon-white.png" alt="BeUnbridled Elk Logo" class="logo">
+            </a>
+            <span class="wordmark">BeUnbridled</span>
+            <span class="badge">Setup Guide</span>
+        </header>
+
         <h1>Create Your Agent's Telegram Bot</h1>
-        <h2 class="subtitle">It takes about 5 minutes. You only do it once.</h2>
+        <p class="subtitle">It takes about 5 minutes. You only do it once.</p>
 
-        <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-                <h3>Download Telegram (if you haven't already)</h3>
-                <ul>
-                    <li>Download Telegram free at <a href="https://telegram.org" target="_blank">telegram.org</a> or from the App Store / Google Play.</li>
-                    <li>Create an account with your phone number.</li>
-                    <li>Set a username: tap the menu (☰) → Settings → Edit Profile → Username. This is how your agent will identify you.</li>
-                </ul>
+        <div class="card step-list">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 class="step-title">Download Telegram</h3>
+                    <p class="step-body">Visit <a href="https://telegram.org" target="_blank">telegram.org</a> or your device's App Store/Google Play to download the app. Create an account, then open Settings → Edit Profile → Username to set a public username.</p>
+                </div>
+            </div>
+            <hr class="step-divider">
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3 class="step-title">Open BotFather</h3>
+                    <p class="step-body">In Telegram, search for <code>@BotFather</code> (look for the blue checkmark) and tap on it. Then, tap the "Start" button to begin interacting with the official Telegram bot creator.</p>
+                </div>
+            </div>
+            <hr class="step-divider">
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 class="step-title">Create your bot</h3>
+                    <p class="step-body">Send the command <code>/newbot</code> to BotFather. Follow the prompts:</p>
+                    <ul>
+                        <li class="step-body">Pick a display name for your bot (e.g., "BeUnbridled Agent").</li>
+                        <li class="step-body">Pick a username for your bot. This must be unique and <strong>must end in 'bot'</strong> (e.g., "MyUnbridledAssistantBot"). Once set, this username is permanent.</li>
+                    </ul>
+                    <p class="step-body">BotFather will then give you an HTTP API token, which looks something like <code>8673964185:ABCDEFG12345HIJKLMN67890</code>.</p>
+                </div>
+            </div>
+            <hr class="step-divider">
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 class="step-title">Send us your token</h3>
+                    <p class="step-body">Copy the <strong>full</strong> API token provided by BotFather. Send it to your BeUnbridled onboarding contact or reply to your onboarding email with the token. Treat this token like a password and keep it safe.</p>
+                </div>
             </div>
         </div>
 
-        <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-                <h3>Open BotFather</h3>
-                <ul>
-                    <li>In Telegram, search for "<code>@BotFather</code>" (the official blue checkmark bot).</li>
-                    <li>Tap Start.</li>
-                </ul>
-            </div>
+        <div class="card warning-card">
+            <p class="step-body" style="margin: 0;">⚠️ <strong>Keep your bot token private.</strong> Don't share it publicly or commit it to code.</p>
         </div>
 
-        <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-                <h3>Create your bot</h3>
-                <ul>
-                    <li>Type <code>/newbot</code> and hit send.</li>
-                    <li>BotFather will ask for a display name — this is what shows up in your chat (e.g. "Max" or "Aria").</li>
-                    <li>Then it will ask for a username — this must end in "<code>bot</code>" (e.g. "<code>MaxAtAcmeCo_bot</code>"). This is permanent, so choose carefully.</li>
-                    <li>BotFather will give you a token that looks like: <code>8673964185:AAEW-bpYDGzfa1Ir2FJtWvx-kUPkT1HgXNI</code></li>
-                </ul>
-            </div>
-        </div>
+        <p class="subtitle" style="margin-top: 2rem; margin-bottom: 0;">That's it. We'll take it from here and have your agent live within 24 hours.</p>
 
-        <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-                <h3>Send us your token</h3>
-                <ul>
-                    <li>Copy the full token BotFather gave you.</li>
-                    <li>Send it to your BeUnbridled onboarding contact (or reply to your onboarding email).</li>
-                    <li>Keep it safe — treat it like a password.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="note-box">
-            <p>⚠️ Keep your bot token private. Don't share it publicly or commit it to code.</p>
-        </div>
-
-        <div class="youre-done">
-            <p>That's it. We'll take it from here and have your agent live within 24 hours.</p>
-        </div>
+        <footer>
+            beunbridled.ai · Doing Good by Doing Well
+        </footer>
     </div>
 </body>
 </html>
