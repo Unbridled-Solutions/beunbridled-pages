@@ -413,6 +413,15 @@
             border-color: var(--light-blue);
         }
 
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Completion Screen */
         #completion-screen {
             text-align: center;
@@ -579,7 +588,7 @@
                         <h2>Challenges & Ambitions</h2>
                         <div class="form-group">
                             <label for="challengesAmbitions">Challenges &amp; Ambitions</label>
-                            <textarea id="challengesAmbitions" name="challengesAmbitions" rows="5" placeholder="e.g. I spend too much time on email, I want to grow my client base, I need help staying on top of follow-ups..."></textarea>
+                            <textarea id="challengesAmbitions" name="challengesAmbitions" rows="5"></textarea>
                             <div class="helper-text">Are there any particular challenges and/or ambitions you'd like to address?</div>
                         </div>
                         <div class="form-navigation">
@@ -751,6 +760,10 @@
 
 
             try {
+                // Disable submit button and show loading state
+                const submitBtn = document.querySelector('.btn-submit');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<svg style="animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-right:0.4rem" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Submitting…';
                 // Simulate Airtable POST
                 // Replace with actual Airtable POST logic
                 const response = await fetch('https://beunbridled-onboarding.unbridled.workers.dev', {
@@ -766,11 +779,15 @@
                     completionScreen.style.display = 'block';
                     displaySubmissionSummary(data);
                 } else {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Try Again';
                     alert('Submission failed. Please try again.');
                     console.error('Submission error:', response.statusText, await response.text());
                 }
             } catch (error) {
-                alert('An unexpected error occurred. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Try Again';
+                    alert('An unexpected error occurred. Please try again.');
                 console.error('Fetch error:', error);
             }
         });
