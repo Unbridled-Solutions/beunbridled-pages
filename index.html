@@ -256,7 +256,7 @@
 <body>
   <!-- Background video -->
   <div class="bg-video-wrap">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted playsinline id="bg-video">
       <source src="bg-video.webm" type="video/webm">
       <source src="bg-video.mp4" type="video/mp4">
     </video>
@@ -271,11 +271,10 @@
 
     <h1 class="wordmark">Be<span class="highlight">Unbridled</span>.ai</h1>
 
-    <p class="tagline">An AI agent that actually does work.</p>
+    <p class="tagline">Done-for-you AI Digital Chief of Staff, delivered as a managed service.</p>
 
     <p class="description">
-      AI agents built for every vertical in your organization —
-      designed to work the way your team actually does.
+      Each client gets a dedicated AI agent built specifically for their business. Lives on its own secure server, converses in plain english, executes real work. White-glove onboarding + ongoing human touch.
     </p>
 
     <label class="form-label" for="email">Be first to know when we launch.</label>
@@ -321,6 +320,12 @@
         form.style.display = 'none';
         success.style.display = 'block';
       }
+    });
+  </script>
+  <script>
+    const vid = document.getElementById('bg-video');
+    vid.addEventListener('ended', function() {
+      vid.pause();
     });
   </script>
 </body>
