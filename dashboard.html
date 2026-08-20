@@ -637,171 +637,60 @@
 
     <!-- Stats -->
     <div class="stats-strip">
-      <div class="stat"><div class="val">9</div><div class="lbl">Agents Deployed</div></div>
-      <div class="stat"><div class="val">8</div><div class="lbl">Live</div></div>
-      <div class="stat"><div class="val">1</div><div class="lbl">Pending</div></div>
-      <div class="stat"><div class="val">4</div><div class="lbl">External Clients</div></div>
-      <div class="stat"><div class="val">5</div><div class="lbl">Internal / Vertical</div></div>
-      <div class="stat"><div class="val">$2,750</div><div class="lbl">MRR</div></div>
+      <div class="stat"><div class="val">19</div><div class="lbl">Live Profiles</div></div>
+      <div class="stat"><div class="val">15</div><div class="lbl">Servers</div></div>
+      <div class="stat"><div class="val">1</div><div class="lbl">Archived</div></div>
+      <div class="stat"><div class="val">0</div><div class="lbl">Pending</div></div>
+      <div class="stat"><div class="val">17</div><div class="lbl">Unbridled / Family</div></div>
+      <div class="stat"><div class="val">2</div><div class="lbl">External</div></div>
     </div>
 
-    <!-- Agent Cards -->
     <div class="section-header"><h2>Active Agents</h2></div>
     <div class="agent-grid">
 
-      <!-- MC (master server) -->
       <div class="agent-card">
         <div class="card-header">
           <div>
             <div class="agent-name">MC</div>
-            <div class="agent-client">Master of Ceremonies — Unbridled HQ</div>
+            <div class="agent-client">Stan Bullis · Lindsay Wyss — Unbridled HQ</div>
           </div>
           <span class="status-pill status-live">✓ Live</span>
         </div>
         <div class="card-body">
           <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">mc-hermes</span></div>
             <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.101.101')">5.161.101.101</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX23 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Obsidian</span><span class="detail-val plain">✓ mc-notes vault</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">—</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">mc-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span> &nbsp;<span class="backup-na">+ Weekly Sun 4am</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="backup-ok">✓ Weekly audit · Monthly pentest · Daily health</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 7, 2026</span></div>
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">mc-hermes</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX23 · Ashburn</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Orchestrator</span></span></div>
           </div>
           <div class="card-tags">
             <span class="tag">Orchestrator</span>
-            <span class="tag">All Skills</span>
-            <span class="tag">Obsidian ✓</span>
-            <span class="tag">Google Ads ✓</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ruby -->
-      <div class="agent-card">
-        <div class="card-header">
-          <div>
-            <div class="agent-name">Ruby</div>
-            <div class="agent-client">Jenny Farr — Hotel St. Cloud</div>
-          </div>
-          <span class="status-pill status-live">✓ Live</span>
-        </div>
-        <div class="card-body">
-          <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-ruby</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.250.189')">5.161.250.189</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@StCloudRubyBot</span></div>
-            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8503827194</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">ruby-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 11, 2026</span></div>
-            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
-          </div>
-          <div class="card-tags">
-            <span class="tag">Marketing</span>
-            <span class="tag">Social Media</span>
-            <span class="tag">Google Workspace</span>
-            <span class="tag">Obsidian ✓</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- jfarr2000 -->
-      <div class="agent-card">
-        <div class="card-header">
-          <div>
-            <div class="agent-name">jfarr2000</div>
-            <div class="agent-client">Justin Farr — JFARR2000</div>
-          </div>
-          <span class="status-pill status-live">✓ Live</span>
-        </div>
-        <div class="card-body">
-          <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-jfarr2000</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.238.200')">5.161.238.200</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@jfarr_2000_bot</span></div>
-            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8221308132</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">jfarr2000-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 12, 2026</span></div>
-            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
-          </div>
-          <div class="card-tags">
-            <span class="tag">Infrastructure</span>
-            <span class="tag">AI Ops</span>
-            <span class="tag">Voice PWA ✓</span>
-            <span class="tag">SMS ✓</span>
-            <span class="tag">Obsidian ✓</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grand Poobah -->
-      <div class="agent-card">
-        <div class="card-header">
-          <div>
-            <div class="agent-name">Grand Poobah</div>
-            <div class="agent-client">Mark — Unbridled Hospitality Group</div>
-          </div>
-          <span class="status-pill status-internal">⬡ Internal</span>
-        </div>
-        <div class="card-body">
-          <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-grand-poobah</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.214.45')">5.161.214.45</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@GrandPoobahBot</span></div>
-            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8831016502</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">grand-poobah-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 13, 2026</span></div>
-            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">Internal</span></div>
-          </div>
-          <div class="card-tags">
-            <span class="tag">Hospitality</span>
-            <span class="tag">UHG</span>
-            <span class="tag">Nightly Report → MC</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- MC-PP -->
-      <div class="agent-card">
-        <div class="card-header">
-          <div>
-            <div class="agent-name">MC-PP</div>
-            <div class="agent-client">Nina &amp; Liz — UnbridledPP</div>
-          </div>
-          <span class="status-pill status-live">✓ Live</span>
-        </div>
-        <div class="card-body">
-          <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-mc-pp</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.206.42')">5.161.206.42</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@Unbridled_p_and_p_bot</span></div>
-            <div class="detail-row"><span class="detail-key">TG IDs</span><span class="detail-val">8175218451 · 8853437957</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">mc-pp-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Migrated</span><span class="detail-val plain">May 20, 2026</span></div>
-          </div>
-          <div class="card-tags">
-            <span class="tag">Live Events</span>
             <span class="tag">Unbridled Family</span>
-            <span class="tag">Command Center ✓</span>
           </div>
         </div>
       </div>
 
-      <!-- Wealth Commander -->
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">BeUnbridled MC</div>
+            <div class="agent-client">Justin Farr — BeUnbridled.AI</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'178.156.245.135')">178.156.245.135</span></span></div>
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-beunbridled-mc</span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Fleet ops · onboarding · brand</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Platform</span>
+            <span class="tag">Provisions fleet</span>
+          </div>
+        </div>
+      </div>
+
       <div class="agent-card">
         <div class="card-header">
           <div>
@@ -812,117 +701,381 @@
         </div>
         <div class="card-body">
           <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-wealth-commander</span></div>
             <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.207.78')">5.161.207.78</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Obsidian</span><span class="detail-val plain">✓ Wealth Commander Work Notes</span></div>
-            <div class="detail-row"><span class="detail-key">Dashboard</span><span class="detail-val"><a href="https://wealth.beunbridled.ai/dashboard" target="_blank">wealth.beunbridled.ai/dashboard ↗</a></span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@wealth_commander_bot</span></div>
-            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">6064590731</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX13 · Ashburn</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Internal wealth strategy</span></span></div>
             <div class="detail-row"><span class="detail-key">Web</span><span class="detail-val"><a href="https://wealth.beunbridled.ai" target="_blank">wealth.beunbridled.ai ↗</a></span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">wealth-commander-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 19, 2026</span></div>
-            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$1,000 / mo</span></div>
           </div>
           <div class="card-tags">
             <span class="tag">Financial Services</span>
-            <span class="tag">Life Insurance</span>
-            <span class="tag">Trello ✓</span>
+            <span class="tag">Internal</span>
             <span class="tag">Unbridled Family</span>
-            <span class="tag">Command Center ✓</span>
           </div>
         </div>
       </div>
 
-      <!-- Port -->
       <div class="agent-card">
         <div class="card-header">
           <div>
-            <div class="agent-name">Port</div>
-            <div class="agent-client">Brandon — Unbridled Port</div>
+            <div class="agent-name">Wealth Advisor</div>
+            <div class="agent-client">Jack Carlson — Unbridled Wealth</div>
           </div>
           <span class="status-pill status-live">✓ Live</span>
         </div>
         <div class="card-body">
           <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-port</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.72.86')">5.161.72.86</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@unbridled_port_bot</span></div>
-            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8721359010</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">port-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">May 22, 2026</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.47.5')">5.161.47.5</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX13 · Ashburn</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Client-facing advisor</span></span></div>
           </div>
           <div class="card-tags">
-            <span class="tag">Hospitality</span>
+            <span class="tag">Financial Services</span>
+            <span class="tag">Client-facing</span>
             <span class="tag">Unbridled Family</span>
-            <span class="tag">Command Center ✓</span>
           </div>
         </div>
       </div>
 
-      <!-- Productions Commander -->
       <div class="agent-card">
         <div class="card-header">
           <div>
-            <div class="agent-name">Productions Commander</div>
+            <div class="agent-name">Grand Poobah</div>
+            <div class="agent-client">Mark Hampton — Unbridled Hospitality</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.214.45')">5.161.214.45</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@GrandPoobahBot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX13 · Ashburn</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">Same box as DCPC + Politic</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Hospitality</span>
+            <span class="tag">UHG</span>
+            <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">DCPC</div>
+            <div class="agent-client">Mark Hampton — Planning commission</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.214.45')">5.161.214.45</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Profile on Grand Poobah box</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Douglas County Planning Commission</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Civic</span>
+            <span class="tag">Mark ×3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Politic</div>
+            <div class="agent-client">Mark Hampton — Political organizing</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.214.45')">5.161.214.45</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Profile on Grand Poobah box</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Campaigns, voter outreach</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Political</span>
+            <span class="tag">Mark ×3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">MC-PP</div>
+            <div class="agent-client">Nina Stemple · Liz Hunt — People & Possibilities</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.206.42')">5.161.206.42</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@Unbridled_p_and_p_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX13 · Ashburn</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Live Events</span>
+            <span class="tag">People</span>
+            <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Port</div>
+            <div class="agent-client">Brandon Maroni — Unbridled Solutions BD</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.72.86')">5.161.72.86</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@unbridled_port_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX13 · Ashburn</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">BD</span>
+            <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Timber</div>
+            <div class="agent-client">TJ's Log & Timber</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'178.156.247.244')">178.156.247.244</span></span></div>
+            <div class="detail-row"><span class="detail-key">Operators</span><span class="detail-val"><span class="plain">Justin · Stan · Jonathan</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX13 · Ashburn</span></span></div>
+            <div class="detail-row"><span class="detail-key">Live</span><span class="detail-val"><span class="plain">August 18, 2026</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">TJ's</span>
+            <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Media Mike</div>
+            <div class="agent-client">Mike Walsh — Unbridled Media</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'178.156.215.107')">178.156.215.107</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Video shop · Denver + St. Louis</span></span></div>
+            <div class="detail-row"><span class="detail-key">Live</span><span class="detail-val"><span class="plain">August 19, 2026</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Media</span>
+            <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Production Commander</div>
             <div class="agent-client">Don Ceppi — Unbridled Productions</div>
           </div>
           <span class="status-pill status-live">✓ Live</span>
         </div>
         <div class="card-body">
           <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-production-commander</span></div>
             <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'178.156.200.3')">178.156.200.3</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner · 2 vCPU / 8GB · Helsinki</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">@unbridled_productions_bot</span></div>
+            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-production-commander</span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@unbridled_productions_bot</span></span></div>
             <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val">8838521315</span></div>
-            <div class="detail-row"><span class="detail-key">Allowlist</span><span class="detail-val plain">Don 8838521315 · Justin 8221308132</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val plain">⚠️ Script still points at timber-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="scan-date">rclone binary missing · do not run leftover Timber script</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">August 20, 2026</span></div>
-            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">Internal</span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner · 2 vCPU / 8GB · Helsinki</span></span></div>
+            <div class="detail-row"><span class="detail-key">Live</span><span class="detail-val"><span class="plain">August 20, 2026</span></span></div>
           </div>
           <div class="card-tags">
             <span class="tag">Live Events</span>
             <span class="tag">Unbridled Productions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">OD Commander</div>
+            <div class="agent-client">Elizabeth Heron — OrangeDoor</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'178.156.192.121')">178.156.192.121</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">B2B events · London</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">OrangeDoor is one word</span></span></div>
+            <div class="detail-row"><span class="detail-key">Live</span><span class="detail-val"><span class="plain">August 20, 2026</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">OrangeDoor</span>
             <span class="tag">Unbridled Family</span>
           </div>
         </div>
       </div>
 
-      <!-- Wealth Advisor Bot -->
       <div class="agent-card">
         <div class="card-header">
           <div>
-            <div class="agent-name">Wealth Advisor Bot</div>
-            <div class="agent-client">Unbridled Wealth — Advisor Team</div>
+            <div class="agent-name">Fremont</div>
+            <div class="agent-client">Tim Slaughenhaupt — Fremont Makers</div>
           </div>
-          <span class="status-pill status-pending">⏳ Pending</span>
+          <span class="status-pill status-live">✓ Live</span>
         </div>
         <div class="card-body">
           <div class="detail-rows">
-            <div class="detail-row"><span class="detail-key">Server</span><span class="detail-val">hermes-wealth-advisor</span></div>
-            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.47.5')">5.161.47.5</span></span></div>
-            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val plain">Hetzner CCX13 · Ashburn</span></div>
-            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val plain">⏳ Awaiting token from Jonathan</span></div>
-            <div class="detail-row"><span class="detail-key">TG ID</span><span class="detail-val plain">⏳ Pending first message</span></div>
-            <div class="detail-row"><span class="detail-key">Obsidian</span><span class="detail-val plain">✓ wealth-advisor-notes vault</span></div>
-            <div class="detail-row"><span class="detail-key">B2 Bucket</span><span class="detail-val">wealth-advisor-hermes-hetzner-backups</span></div>
-            <div class="detail-row"><span class="detail-key">Backup</span><span class="detail-val plain"><span class="backup-ok">✓ Nightly 3am MT</span></span></div>
-            <div class="detail-row"><span class="detail-key">Sec Scan</span><span class="detail-val plain"><span class="scan-date">Not yet scheduled</span></span></div>
-            <div class="detail-row"><span class="detail-key">Launched</span><span class="detail-val plain">Jun 2, 2026</span></div>
-            <div class="detail-row"><span class="detail-key">Rate</span><span class="detail-val plain">$750 / mo</span></div>
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'87.99.140.5')">87.99.140.5</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@unbridled_fremont_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Cabinetry / woodworking</span></span></div>
           </div>
           <div class="card-tags">
-            <span class="tag">Financial Services</span>
-            <span class="tag">Life Insurance</span>
-            <span class="tag">IBC</span>
+            <span class="tag">Fremont Makers</span>
             <span class="tag">Unbridled Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Jimm</div>
+            <div class="agent-client">Megg Alviso — UnbridledACTS</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'87.99.153.114')">87.99.153.114</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@jimm_unbridledacts_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">Same box as Guardian + Paul</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">ACTS</span>
+            <span class="tag">Nonprofit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Guardian</div>
+            <div class="agent-client">Dave Harris — Mizizi</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'87.99.153.114')">87.99.153.114</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@guardian_mizizi_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">Profile on ACTS box</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Mizizi</span>
+            <span class="tag">Nonprofit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Paul</div>
+            <div class="agent-client">Beverly Harris — Mizizi ministry</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'87.99.153.114')">87.99.153.114</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Women and families, rural Uganda</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">Profile on ACTS box</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Mizizi</span>
+            <span class="tag">Nonprofit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Ragnar</div>
+            <div class="agent-client">Curtis — personal</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.250.189')">5.161.250.189</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@ragnar_curtis_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">Replaced Ruby July 2026. Not Jenny.</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">External</span>
+            <span class="tag">Was Ruby box</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Axl</div>
+            <div class="agent-client">Clayton Morris — Redacted</div>
+          </div>
+          <span class="status-pill status-live">✓ Live</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'178.156.149.6')">178.156.149.6</span></span></div>
+            <div class="detail-row"><span class="detail-key">Bot</span><span class="detail-val"><span class="plain">@unbridled_axl_bot</span></span></div>
+            <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val"><span class="plain">Hetzner CCX23 · Ashburn</span></span></div>
+            <div class="detail-row"><span class="detail-key">Role</span><span class="detail-val"><span class="plain">Redacted News / Invest</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">External</span>
+            <span class="tag">Client</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="card-header">
+          <div>
+            <div class="agent-name">Ruby</div>
+            <div class="agent-client">Jenny Farr — archived July 19, 2026</div>
+          </div>
+          <span class="status-pill status-pending">Archived</span>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row"><span class="detail-key">IP</span><span class="detail-val"><span class="ip-copy" onclick="copyIP(this,'5.161.250.189')">5.161.250.189</span></span></div>
+            <div class="detail-row"><span class="detail-key">Status</span><span class="detail-val"><span class="plain">Archived. Box is now Ragnar.</span></span></div>
+            <div class="detail-row"><span class="detail-key">Note</span><span class="detail-val"><span class="plain">Do not assign work. Do not say Jenny operates an agent.</span></span></div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">Archived</span>
           </div>
         </div>
       </div>
@@ -953,43 +1106,22 @@
       </tbody>
     </table>
 
-    <!-- Open Items -->
     <div class="section-header"><h2>Open Items</h2></div>
     <div class="open-items">
       <div class="open-item">
         <div class="dot"></div>
-        <span class="agent-tag">jfarr2000</span>
-        <p>Sudo password unknown — hermes user password was randomly generated at provision time. Use Hetzner VNC console + root password <code>T7S?BfXnzoae</code> for any sudo commands needed.</p>
+        <span class="agent-tag">Production Commander</span>
+        <p>Backup script is leftover Timber (<code>timber-hermes-hetzner-backups</code>). rclone binary missing. Do not run until the bucket and binary match this agent.</p>
       </div>
       <div class="open-item">
         <div class="dot"></div>
-        <span class="agent-tag">jfarr2000</span>
-        <p>IDS security feature pending: run <code>sudo usermod -aG adm hermes</code> then restart hermes-ids.service via Hetzner VNC console.</p>
+        <span class="agent-tag">Ruby</span>
+        <p>Archived July 19, 2026. Server <code>5.161.250.189</code> is Ragnar (Curtis), not Jenny Farr. Do not assign work to Ruby.</p>
       </div>
       <div class="open-item">
         <div class="dot"></div>
-        <span class="agent-tag">Grand Poobah</span>
-        <p>Obsidian Sync pending — ob login requires interactive SSH session. Optional but recommended.</p>
-      </div>
-      <div class="open-item">
-        <div class="dot"></div>
-        <span class="agent-tag">Wealth Commander</span>
-        <p>Financial Planner profile — dedicated Hermes profile for financial planning conversations. CCX23 has headroom. Build when Jonathan green-lights.</p>
-      </div>
-      <div class="open-item">
-        <div class="dot"></div>
-        <span class="agent-tag">All Clients</span>
-        <p>client-command-center skill deployed to all 6 agent servers (May 22, 2026). Activate per client when ready — agent reads Business DNA and generates a branded dashboard automatically.</p>
-      </div>
-      <div class="open-item">
-        <div class="dot"></div>
-        <span class="agent-tag">Wealth Advisor Bot</span>
-        <p>Awaiting Telegram bot token from Jonathan Wield — wire into .env and restart gateway. Then collect advisor team Telegram IDs to add to TELEGRAM_ALLOWED_USERS.</p>
-      </div>
-      <div class="open-item">
-        <div class="dot"></div>
-        <span class="agent-tag">Wealth Advisor Bot</span>
-        <p>Obsidian sync not yet set up — ob login requires an interactive SSH session from Justin. Vault name: "Wealth Advisor Work Notes".</p>
+        <span class="agent-tag">Roster sync</span>
+        <p>Source of truth is vault <code>Unbridled Companies/BeUnbridled/BeUnbridled Agent Fleet.md</code>, pushed by BeUnbridled MC. This dashboard must match that file. No Justin personal boxes (jfarr2000, jason-ai).</p>
       </div>
     </div>
 
@@ -1128,7 +1260,7 @@
       <div class="hardening-item"><span class="h-icon">🖥️</span><span class="h-label">Dedicated vCPU isolation</span><span class="h-status h-ok">✓ CCX fleet</span></div>
       <div class="hardening-item"><span class="h-icon">🌐</span><span class="h-label">All pages noindex</span><span class="h-status h-ok">✓ Enforced</span></div>
       <div class="hardening-item"><span class="h-icon">🤫</span><span class="h-label">Crons use shell scripts</span><span class="h-status h-ok">✓ Keys never in transcript</span></div>
-      <div class="hardening-item"><span class="h-icon">🔄</span><span class="h-label">SSL auto-renew (certbot)</span><span class="h-status h-ok">✓ jfarr2000</span></div>
+      <div class="hardening-item"><span class="h-icon">🔄</span><span class="h-label">SSL auto-renew (certbot)</span><span class="h-status h-ok">✓ Where deployed</span></div>
       <div class="hardening-item"><span class="h-icon">⚠️</span><span class="h-label">Security scans — client servers</span><span class="h-status h-warn">⏳ Pending rollout</span></div>
       <div class="hardening-item"><span class="h-icon">⚠️</span><span class="h-label">UFW/fail2ban — client servers</span><span class="h-status h-warn">⏳ Pending rollout</span></div>
     </div>
